@@ -13,7 +13,7 @@ git add     //use to add a single file in track mode
 git add -A     //use to add a all file in track mode
 git commit  //for final commit open vim to enter a msgfmt_format_message
 git commit -m "Your message"  //for final commit but not open vim editor
-git commit -A -m "enter message" /// it is use to add file in track area and commit
+git commit -a -m "enter message" /// it is use to add file in track area and commit
 
 <!-- Operational in git -->
 git checkout filename    ////for recover one file in commit
@@ -27,3 +27,9 @@ git em --cached filename //it is use to remove form stage area
 touch filename.extension  // it is use to create file
 touch .gitignore //take a file name and ignore these file
 
+
+<!-- branch -->
+git branch feature  // to create new branch
+git branch ///to show all branches
+git checkout master // to move one branch to another
+git marge fileename to master //to mearge 2 branch
