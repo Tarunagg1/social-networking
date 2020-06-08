@@ -21,5 +21,5 @@ git log    //// to show all commit and time
 git log -p -no of commit  //// to show filter commit log
 
 
-<!-- git dif -->
+
 
