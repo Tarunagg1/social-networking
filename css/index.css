@@ -1,0 +1,260 @@
+* {box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+.header{
+    background-color: blue;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    position: sticky;
+    z-index: 1;
+    top: 0;
+    cursor: pointer;
+}
+.first-half{
+  width: 50%;
+}
+.first-half h1{
+    font-style: oblique;
+    padding: 18px;
+    font-weight: bold;
+    font-size: 45px;
+    margin-left: 124px;
+}
+.second-half{
+    width: 50%;
+    padding: 10px 40px;
+}
+/* style the container */
+.container {
+    position: relative;
+  border-radius: 5px;
+  height: 81vh;
+  background-color: #f2f2f2;
+  padding: 20px 0 30px 0;
+}
+.disable{
+  cursor: not-allowed;
+}
+.header input {
+    padding: 4px;
+    border-radius: 6px;
+}
+.header button{
+    padding: 4px;
+    width: 69px;
+    outline: none;
+    margin-left: 10px;
+}
+.header span{
+    font-weight: bold;
+    font-size: 15px;
+    padding: 10px;
+    position: absolute;
+    padding: -31px 9px 18px 0px;
+    margin: -32px;
+    margin-left: 21px;
+}
+/* style inputs and link buttons */
+.container input[type=text],input[type=email],input[type=number],input[type=password],input[type=date],
+.btn {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 4px;
+  margin: 5px 0;
+  opacity: 0.85;
+  display: inline-block;
+  font-size: 17px;
+  line-height: 20px;
+  text-decoration: none; /* remove underline from anchors */
+}
+.container input[type=radio]{
+    height: 15px;
+    width: 14%;
+    margin: 4px 0px;
+    margin-top: 24px;
+    margin-bottom: 10px;
+    opacity: 0.85;
+}
+.container input:hover,
+.btn:hover {
+  opacity: 1;
+}
+
+/* add appropriate colors to fb, twitter and google buttons */
+.fb {
+  background-color: #3B5998;
+  color: white;
+}
+
+.twitter {
+  background-color: #55ACEE;
+  color: white;
+}
+
+.google {
+  background-color: #dd4b39;
+  color: white;
+}
+
+/* style the submit button */
+.col1 input[type=submit] {
+  background-color: #4CAF50;
+  color: white;
+  cursor: pointer;
+}
+.col input[type=submit] {
+  background-color: #4CAF50;
+  color: white;
+  cursor: pointer;
+}
+
+
+.col1 input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+/* Two-column layout */
+.col {
+  float: left;
+  width: 50%;
+  margin: auto;
+  padding: 0 50px;
+  margin-top:50px;
+}
+.col1 {
+  float: left;
+  width: 50%;
+  margin: auto;
+  padding: 0 50px;
+  margin-top:50px;
+}
+
+.otp {
+  float: left;
+  width: 50%;
+  margin: auto;
+  display: none;
+  padding: 0 50px;
+  margin-top:100px;
+}
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.footer-col {
+    float: left;
+  width: 50%;
+  margin: auto;
+  padding: 0 50px;
+  margin-top: 6px;
+
+}
+/* vertical line */
+.vl {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
+  border: 2px solid #ddd;
+  height: 175px;
+}
+/* text inside the vertical line */
+.inner {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #f1f1f1;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  padding: 8px 10px;
+}
+
+/* hide some text on medium and large screens */
+.hide-md-lg {
+  display: none;
+}
+.md-lg h3{
+   text-align: center;
+   font-size: 35px;
+   font-weight: bold;
+   padding-bottom: 10px;
+}
+/* bottom container */
+.bottom-container {
+  text-align: center;
+  background-color: #666;
+  border-radius: 0px 0px 4px 4px;
+}
+.small-hide{
+    display: none;
+}
+/* Responsive layout - when the screen is less than 650px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 650px) {
+  .col {
+    width: 100%;
+    margin-top: 0;
+  }
+  .col1 {
+    width: 100%;
+    margin-top: 0;
+  }
+  .otp {
+    width: 100%;
+    margin-top: 0;
+  }
+  /* hide the vertical line */
+  .vl {
+    display: none;
+  }
+  /* show the hidden text on small screens */
+  .hide-md-lg {
+    display: block;
+    text-align: center;
+  }.md-lg{
+      display: none;
+  }.container {
+    height: 131vh;
+}
+.manully{
+  display: none ;
+}
+}
+@media screen and (max-width: 1063px) {
+    .first-half h1{
+        margin-left: 25px;
+    }.second-half span{
+        display: none;
+    }.second-half{
+        width: 100%;
+        margin: 24px 51px 5px -98px;
+     }.second-half input{
+         display: none;
+    }.second-half button{
+        display: none;
+    }.col {
+        width: 100%;
+        margin-top: 21px;
+    }.small-hide{
+        display: block;
+    }.vl {
+        display: none;
+      }.container {
+        height: 122vh;
+            }
+            .col1 {
+              width: 100%;
+              margin-top: 21px;
+          }
+          .otp {
+            width: 100%;
+            margin-top: 21px;
+        }
+        .manully{
+          display: none ;
+        }
+}

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function notify() {
+            if (!Notification) {
+                alert('Desktop notifications not available in your browser. Try Chromium.');
+                return;
+            } else if (Notification.permission !== "granted") {
+                Notification.requestPermission();
+            } else {
+
+                var notification = new Notification('Thi s is Tarun', {
+                    icon: 'http://cdn.sstatic.net/stackexchange/img/logos/so/so-icon.png',
+                    body: "Hey there! You've been notified!",
+                });
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <button id="button" onclick="notify()">Notify</button>
+</body>
+
+</html>
