@@ -1,5 +1,4 @@
 <!-- setup -->
-
 git config --globle user.name your name
 git config --globle user.email your email
 
@@ -19,7 +18,8 @@ git checkout filename    ////for recover one file in commit
 git checkout -f      ////for recover all file in commit
 git log    //// to show all commit and time
 git log -p -no of commit  //// to show filter commit log
-
+git diff  // it compare working dir with stage area
+git diff --staged // it compare working dir with last commit
 
 
 
