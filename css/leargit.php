@@ -20,6 +20,6 @@ git log    //// to show all commit and time
 git log -p -no of commit  //// to show filter commit log
 git diff  // it compare working dir with stage area
 git diff --staged // it compare working dir with last commit
-
-
+git rm  // it is user to remove form working dir or stage area
+git em --cached filename //it is use to remove form stage area
 
