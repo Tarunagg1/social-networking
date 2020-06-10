@@ -36,7 +36,6 @@ git marge fileename to master //to mearge 2 branch
 
 
 <!-- to deploye to github web -->
-
 git remote add origin-name link   ///to add remote directory
 git remote // to see all remote
 git remote -v  ////to see all remote with urldecode

@@ -1,3 +1,17 @@
+<?php
+session_start();
+if(!isset($_SESSION['friendbook'])){
+    header("Location:index.php");
+}else{
+    include_once('dbconf.php');
+    include_once('functions.php');
+    $email = $_SESSION['friendbook'];
+    $data = getuser_info($email);
+    $name = $data['username'];
+    $user_id = $data['user_id'];
+}
+
+?>
 <header>
     <div class="first-sec">
         <i class="fa ser fa-search"></i>
@@ -36,7 +50,7 @@
             <div class="ldiv1">
                 <span>
                     <img src="img/avatar7.png" alt="Not found">
-                    <p class="name">Tarun</p>
+                    <p class="name"><?php echo $name; ?></p>
                 </span>
             </div>
             <div class="ldiv">

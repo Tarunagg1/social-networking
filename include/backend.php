@@ -81,3 +81,21 @@ if(isset($_POST['logusername'])){
      }
   }
 ?>
+
+<?php
+include ("dbconf.php");
+include_once('dbconf.php');
+include_once('functions.php');
+if(isset($_FILES['imagefile']) ||  isset($_POST['content'])){
+    $content = $_POST['content'];
+    $img = "NULL";
+    if(isset($_FILES['imagefile']['name'])){
+    $img =  $_FILES['imagefile']['name'];
+    move_uploaded_file($_FILES["imagefile"]["tmp_name"],"../userimages/".$img);
+    }
+$data = getuser_info($_SESSION['friendbook']);
+    $id = $data['user_id'];
+     $sql = "INSERT INTO `user_post`(`user_id`, `post_content`, `post_img`) VALUES ('$id','$content','$img')";
+    $res = $conn->query($sql);
+}
+?>

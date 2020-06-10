@@ -1,17 +1,13 @@
 $(document).ready(function(){
     $('#serch-textbox').keyup(function(){
-         serchval = $('#serch-textbox').val()
-         console.log(serchval);
-         
+         serchval = $('#serch-textbox').val()         
          if(serchval != 0){
-             console.log("ajax req");
              $.ajax({
                  url:"include/backend1.php",
                  method:"POST",
                  data:{serchval:serchval},
                  success: function(data){
                      $('#serch-list').fadeIn();
-                     console.log(data);
                     $('#serch-ul').html(data);
                  }
              });
@@ -25,30 +21,55 @@ $(document).ready(function(){
     });
 });
 
-// // model code
-// // Get the modal
-// var modal = document.getElementById("myModal");
+function imagevalidate(){
+    var  property = document.getElementById('postimage').files[0];
+    var imgename = property.name;
+    var img_exe = imgename.split('.').pop().toLowerCase();
+    var img_size = property.size;
+    if(jQuery.inArray(img_exe,['img','jpg','png','jpeg']) == -1){
+          alert("Please Upload File having jpg Png jpeg or img");   
+          $('#postbutton').prop('disabled', true);
+    }else if(img_size > 20000){
+                alert("Too Large Uploar Less Then 3 Mb");
+                $('#postbutton').prop('disabled', true);
+    }else{
+            $('#postbutton').prop('disabled', false);
+    } 
+}
 
-// // Get the button that opens the modal
-// var btn = document.getElementById("myBtn");
-
-// // Get the <span> element that closes the modal
-// var span = document.getElementsByClassName("close")[0];
-
-// // When the user clicks the button, open the modal 
-// btn.onclick = function() {
-//   modal.style.display = "block";
-// }
-
-// // When the user clicks on <span> (x), close the modal
-// span.onclick = function() {
-//   modal.style.display = "none";
-// }
-
-// // When the user clicks anywhere outside of the modal, close it
-// window.onclick = function(event) {
-//   if (event.target == modal) {
-//     modal.style.display = "none";
-//   }
-// }
-// // end model code
+$('#createpost').on('submit',function(e){   
+    e.preventDefault();
+    var  property = document.getElementById('postimage').files[0];
+    content = $('#postcontent').val();
+    var form_data = new FormData();
+    form_data.append("imagefile",property); 
+    form_data.append("content",content);
+    $.ajax({
+        url:"include/backend.php",
+        type: 'post',
+        data: form_data,
+        contentType:false,
+        cache:false,
+        processData:false,
+        beforeSend: function () {
+            $('#postbutton').prop('disabled', true);
+            $('#postbutton').val('Please Wait....');
+          },
+          success: function (data) {  
+              console.log(data);
+                 
+              if(data != 0){
+                  alert("some thind wrong")
+              }else{
+                content = $('#postcontent').val("");
+                $('#postbutton').prop('disabled', false);
+                $('#postbutton').val('Post');
+            var modal = document.getElementById("myModal");
+            modal.style.display = "none";
+              }
+          },
+          error:function(){
+              alert("error is accured");
+       }
+    }); 
+});
