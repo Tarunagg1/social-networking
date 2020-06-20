@@ -1,0 +1,71 @@
+body{
+    background-color: #18191a;
+    
+}
+.serch-box-main h2{
+    color: #c5e6eb;
+    margin-left: 20px;
+    padding-top: 11px;
+    font-size: 20px;
+}
+.serch-box-main{
+    height: auto;
+    font-family: Segoe UI Historic, Segoe UI, Helvetica, Arial, sans-serif;'
+    margin: 71px 10px 10px 10px 10px;
+    margin: 4% 0px 0px 34%;
+    width: 50%;
+    background: #242526;
+}
+.serch-box-main .friend-box{
+    display: flex;
+    height: 103px;
+    width: 95%;
+    margin: 2px;
+    color: white;
+}
+.serch-box-main .friend-box .tags{
+    margin-top: 7px;
+}
+.serch-box-main .friend-box img{
+    height: 61px;
+    border-radius: 50%;
+    padding: 5px 3px 0px 8px;
+}
+.serch-box-main .friend-box .tags a{
+    padding: 2px;
+    text-decoration: none;
+    color: white;
+    margin: 13px 18px;
+    font-size: 14px;
+}
+.serch-box-main .friend-box .tags a:hover{
+    text-decoration: underline;
+}
+.serch-box-main .friend-box .tags p{
+    margin: 5px 0px 5px 15px;
+    font-size: 13px;
+    color: #7f7faa; 
+}
+.more{
+    background: #242526;
+    width: 50%;
+    margin-top: -11px;
+    margin-left: 34%;
+    margin-bottom: 40px;
+}
+.more .friend-more{
+    background-color: #303031;
+    width: 91%;
+    border: 1px solid #3a3b3c;
+    margin: 24px 23px 23px;
+    cursor: pointer;
+    color: white;
+    height: 38px;
+    font-weight: bold;
+    outline: none;
+    padding: 7px; 
+}
+.serch-box-main .friend-more:hover{
+    background-color: #3a3b3c;
+    transition: all 0.7 ease-out;
+}

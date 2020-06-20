@@ -114,13 +114,15 @@ header{
     display: inline;
     border-radius: 50%;
 }
+.ldiv1 span a{
+    color: white;
+    text-decoration: none;
+}
 .ldiv1 .name{
     margin-top: -30px;
     font-weight: bold;
     margin-left: 46px;
 }
-
-
 /* main section */
 ::-webkit-scrollbar {
     width: 10px;
@@ -149,7 +151,6 @@ header{
     background: hsl(210, 4%, 10%);
     height: 100%;
     font-family: 'Open Sans', sans-serif;
-    margin-top: 10px;
     position: fixed;
     padding-top: 10px;
     color: #c6c8cc;
@@ -492,6 +493,7 @@ hr {
 .serch-list ul .li li{
     margin-top: 12px;
     width: 245px;
+    margin-left: 11px;
 }
 .serch-list ul .li{
     width: 90%;
@@ -681,6 +683,13 @@ hr {
     margin-top: 103px;
     margin-left: 7px;
 }
-.modal-content .modal-body .post-graphics input{
+.modal-content .modal-body .post-graphics #add-image-temp{
     margin-left: 16%;
+    width: 17%;
+    outline: none;
+    cursor: pointer;
+    border: 1px solid #696a61;
+    background-color: #696a61;
+    color: white;
+    height: 25px;
 }

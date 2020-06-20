@@ -41,10 +41,9 @@ if(isset($_POST['dob'])){
      $vskey = md5(time().$unam);
 
      $subject = "This is Email Varification";
-     $body = "<p>Thanks for registering with Us. Please click this link to complete your registration: <br> <br> http://localhost/active.php?token=$vskey</p>"; 
-        
-     $query = "INSERT INTO `registration`(`username`, `user_email`,`user_number`, `user_password`, `user_gender`, `user_birthday`, `user_otp`) 
-     VALUES ('$unam','$email','$num','$pass','$gender','$dob','$vskey')";
+     $body = "<p>Thanks for registering with Us. Please click this link to complete your registration: <br> <br> http://localhost/active.php?token=$vskey</p>";    
+      $query = "INSERT INTO `registration`(`username`, `user_email`,`user_number`, `user_password`, `user_gender`,`user_img`,`user_cover_img`,`user_birthday`, `user_otp`) 
+     VALUES ('$unam','$email','$num','$pass','$gender','temp-user.png','blackbener.jpg','$dob','$vskey')";
      if(mysqli_query($conn,$query)){
         sendmailuser($email,$subject,$body);
      }else{
@@ -83,11 +82,11 @@ if(isset($_POST['logusername'])){
 ?>
 
 <?php
-include ("dbconf.php");
 include_once('dbconf.php');
 include_once('functions.php');
 if(isset($_FILES['imagefile']) ||  isset($_POST['content'])){
-    $content = $_POST['content'];
+    $content = mysqli_real_escape_string($conn,$_POST['content']);
+    $time = time();
     $img = "NULL";
     if(isset($_FILES['imagefile']['name'])){
     $img =  $_FILES['imagefile']['name'];
@@ -95,7 +94,7 @@ if(isset($_FILES['imagefile']) ||  isset($_POST['content'])){
     }
 $data = getuser_info($_SESSION['friendbook']);
     $id = $data['user_id'];
-     $sql = "INSERT INTO `user_post`(`user_id`, `post_content`, `post_img`) VALUES ('$id','$content','$img')";
+     $sql = "INSERT INTO `user_post`(`user_id`, `post_content`, `time`,`post_img`) VALUES ('$id','$content','$time','$img')";
     $res = $conn->query($sql);
 }
 ?>

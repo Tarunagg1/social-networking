@@ -18,7 +18,8 @@
                 </div>
                 <div class="post-graphics">
                     <span>Add With Your post</span>
-                    <input type="file" id="postimage" name="postimage" onchange="return imagevalidate()">
+                    <input  id="add-image-temp" type="button" value="Add Image"><span id="file-name">File Name</span>
+                    <input type="file" hidden="hidden" id="postimage" name="postimage" onchange="return imagevalidate()">
                 </div>
             </div>
             <div class="modal-footer">
