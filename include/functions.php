@@ -79,5 +79,33 @@ function decrypt($message,$private_key){
     );
       return $plaintext;
    }
-   
+
+ function getuserdataid($id){
+     global $conn;
+    $res = mysqli_query($conn,"SELECT * FROM registration WHERE user_id='$id'");
+    return $res;
+ }  
+
+function findpost($id){
+    global $conn;
+    $query = "SELECT * FROM user_post WHERE user_id='$id' AND post_active='1' AND hide_timeline='1' ORDER BY post_id DESC ";
+    $res = mysqli_query($conn,$query);
+    return $res;
+}
+function checkrequest($from_id,$to_id){
+    global $conn;
+    $data = mysqli_query($conn,"SELECT * FROM friend_request WHERE 	from_id='$from_id' AND to_id='$to_id' AND status='unaprove'");
+    if(mysqli_num_rows($data) == 1){
+        return true;
+    }else{
+        return false;
+    }
+} 
+
+function reciverequest($to_id){
+      global $conn;
+      $data = mysqli_query($conn,"SELECT * FROM friend_request WHERE to_id='$to_id' AND status='unaprove'");
+      return $data;
+}
+
 ?>

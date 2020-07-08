@@ -44,6 +44,18 @@ function imagevalidate() {
         $('#file-name').text(imgename)    
     }
 }
+$('#postimage').on("change",function(){
+    console.log("okijuhygt");
+    const file = this.files[0];     
+    console.log(file);
+                       
+    const reader = new FileReader();
+    reader.onload = function(e){
+        $('#add-image').attr('src',e.target.result)
+    }
+    reader.readAsDataURL(this.files[0])
+})
+
 
 $('#createpost').on('submit', function (e) {
     e.preventDefault();

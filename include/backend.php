@@ -82,6 +82,7 @@ if(isset($_POST['logusername'])){
 ?>
 
 <?php
+////////////////// create post
 include_once('dbconf.php');
 include_once('functions.php');
 if(isset($_FILES['imagefile']) ||  isset($_POST['content'])){

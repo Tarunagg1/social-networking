@@ -44,14 +44,18 @@ echo $dummytext;
 // Featch serch data from db
 include ('dbconf.php');
 if(isset($_POST['commentcount'] , $_POST['keyword'])){
+        $start_time = microtime(true); 
         $count = $_POST['commentcount'];
         $keyword = $_POST['keyword'];
          include('dbconf.php');
          $output = "";
-         $output .="<h2>People</h2>";
+         $q = mysqli_query($conn,"SELECT * FROM registration WHERE username LIKE '%$keyword%' OR user_email LIKE '%$keyword%'");
+         $re = mysqli_num_rows($q);
          $query = "SELECT * FROM registration WHERE username LIKE '%$keyword%' OR user_email LIKE '%$keyword%' LIMIT $count";
          $res = $conn->query($query);
- 
+         $end_time = microtime(true); 
+         $execution_time = ($end_time - $start_time); 
+         $output .='<h2>People</h2><p id="time-sec-p">About '.$re.' Result In ('.$execution_time.' Seconds)</p>'; 
          while($row = mysqli_fetch_assoc($res)){  
             $output .='<div class="friend-box">
             <img src="img/avatar7.png" alt="">
@@ -61,10 +65,8 @@ if(isset($_POST['commentcount'] , $_POST['keyword'])){
                 <p>jiuhygtfrd jhgf ijuhyg jiuhyg </p>
             </div>
         </div> <div class="seprator"></div>';
-
         }
         echo $output;
-    }
-        
+    }      
 ?>
 

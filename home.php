@@ -1,3 +1,7 @@
+<?php
+define("page", "home");
+define("title", "home");
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -21,10 +25,10 @@
                         <i class="fa fa-arrow-right" aria-hidden="true"></i>
                     </div>
                     <div class="stories">
-                        <img src="img/avatar7.png" alt="">
+                    <img src="img/avatar7.png" alt="">
                         <div class="story-inner-img">
-                            <p>Tarun Aggarwal</p>
-                            <img src="img/avatar7.png" alt="">
+                            <p><?php echo ucfirst($name); ?></p>
+                            <img src="userimages/<?php echo $user_img; ?>" alt="User img">
                         </div>
                     </div>
                     <div class="stories"></div>
@@ -33,13 +37,13 @@
                 </div>
                 <div class="main-sendpost">
                     <div class="send-post">
-                        <img src="img/avatar7.png" alt="">
-                        <input type="text" id="myBtn" placeholder="What's on your mind, Tarun?">
+                    <img src="userimages/<?php echo $user_img; ?>" alt="User img">
+                        <input type="text" id="myBtn" placeholder="What's on your mind, <?php echo ucfirst($name); ?>?">
                     </div>
                 </div>
                 <div class="posts">
                     <div class="post-header">
-                        <img src="img/avatar7.png" alt="">
+                    <img src="userimages/<?php echo $user_img; ?>" alt="User img">
                         <a href="#" id="name">Tarun Aggarwal jihuy ijuh ijhug ijuh gjhuyg huyg juh </a>
                         <p id="time">Yesterdatyb 008 52</p>
                     </div>

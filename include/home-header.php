@@ -9,6 +9,8 @@ if(!isset($_SESSION['friendbook'])){
     $data = getuser_info($email);
     $name = $data['username'];
     $user_id = $data['user_id'];
+    $user_img = $data['user_img'];
+
 }
 
 ?>
@@ -22,34 +24,35 @@ if(!isset($_SESSION['friendbook'])){
     </div>
     <div class="second-sec">
         <ul>
-            <li>
-                <div class="icon">
-                    <i class="fa fa-home"></i>
+          <a href="home.php"> <li>
+                 <div class="icon">
+                    <i class="fa fa-home <?php if(page == "home"){ echo "iconactive";}  ?>"></i>
                 </div>
-            </li>
-            <li>
+                <?php if(page == "home"){ echo '<span class="line"></span>';}  ?>
+            </li></a>
+            <a href="friend.php"> <li>
                 <div class="icon">
-                    <i class="fa fa-user iconactive" aria-hidden="true"></i>
+                    <i class="fa fa-user <?php if(page == "friend"){ echo "iconactive";}  ?>" aria-hidden="true"></i>
                 </div>
-                <span class="line"></span>
-            </li>
-            <li>
+                <?php if(page == "friend"){ echo '<span class="line"></span>';}  ?>
+            </li></a>
+            <a href="home.php">  <li>
                 <div class="icon">
                     <i class="fa fa-play-circle"></i>
                 </div>
-            </li>
-            <li>
+            </li></a>
+            <a href="home.php">    <li>
                 <div class="icon">
                     <i class="fa fa-users" aria-hidden="true"></i>
                 </div>
-            </li>
+            </li></a>
         </ul>
     </div>
     <div class="last-sec">
         <ul>
             <div class="ldiv1">
                 <span>
-                <a href="profile.php">  <img src="img/avatar7.png" alt="Not found">
+                <a href="profile.php">  <img src="userimages/<?php echo $user_img; ?>" alt="Not found">
                   <p class="name"><?php echo ucfirst($name); ?></p></a>
                 </span>
             </div>

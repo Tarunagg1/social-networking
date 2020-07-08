@@ -46,6 +46,10 @@ header{
 .second-sec ul{
     margin-left: -20px;
 }
+.second-sec ul a{
+    text-decoration: none;
+    color: white;
+}
 .second-sec li {
     list-style: none;
     display: inline-block;
@@ -76,12 +80,11 @@ header{
     transition: all 0.5s ease-out;
     background-color: #3a3b3c;
 }
-
 .last-sec{
     width: 30%;
 }
 .last-sec ul{
-    margin-left: 40px;
+    margin-left: -21px;
 }
 .last-sec ul .ldiv{
     display: inline-flex;
@@ -172,7 +175,8 @@ header{
 }
 
 .container .left .tab img{
-    height: 36px;
+    height: 40px;
+    border-radius: 50%;
     width: 43px;
 }
 .container .left .tab i{
@@ -258,7 +262,7 @@ header{
 }
 .container .right .rigtt-con .users span{
     font-size: 13px;
-    margin: 21px 0px 0px 22%;
+    margin: 21px 0px 0px 20%;
 }
 .container .right .rigtt-con .users p{
   
@@ -683,7 +687,7 @@ hr {
     margin-top: 103px;
     margin-left: 7px;
 }
-.modal-content .modal-body .post-graphics #add-image-temp{
+.modal-content .modal-body .post-graphics .add-image-temp{
     margin-left: 16%;
     width: 17%;
     outline: none;

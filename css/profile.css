@@ -54,7 +54,6 @@ body{
     margin-left: 3px;
     width: 100%;
 }
-
 .profile-pics .profile-pic .cover-pic .upload-button .cover-pic-list .col:hover{
     background-color: #3a3b3c;
     transition: 0.4s ease-out;
@@ -235,7 +234,6 @@ body{
     margin-left: 7px;
     height: 34px;
 }
-
 .pic-buttom .pic-buttom-last-header .division .second .buttons button:hover{
     background-color: #303031;
     border: 1px solid #3a3b3c;
@@ -311,7 +309,6 @@ body{
 }
 .profile-container .profile-main .left .box .row{
     margin: 2px 0px 0px 0px;
-    display: flex;
 }
 
 .profile-container .profile-main .left .box .row img{
@@ -382,10 +379,10 @@ body{
 }
 .profile-container .profile-main .right .box .post-header span{
     position: absolute;
-    margin: 9px;
     cursor: pointer;
-    font-size: 24px;
-    margin-left: 21%;
+    font-size: 30px;
+    margin-left: 19%;
+    margin-top: 10px;
 }
 .profile-container .profile-main .right .box .post-header #time{
     margin: 3px 0px 0px 76px;
@@ -418,21 +415,24 @@ hr {
 .profile-container .profile-main .right .box .row .post-counts #likes{
     margin: 0px 46% 0px 12px;
     font-size: 14px;
+    cursor: pointer;
     font-weight: bold;
 }
 
 .profile-container .profile-main .right .box .row .post-counts #comment{
     font-size: 14px;
     margin: 9px;
+    cursor: pointer;
     font-weight: bold;
 }
 .profile-container .profile-main .right .box .row .post-counts #share{
     font-size: 14px;
     font-weight: bold;
+    cursor: pointer;
 }
 .profile-container .profile-main .right .box .row .post-actions .p-btn{
-    width: 29%;
-    height: 29px;
+    width: 27%;
+    height: 31px;
     color: #91acb8;
     cursor: pointer;
     font-weight: bold;
@@ -445,6 +445,16 @@ hr {
 
 .profile-container .profile-main .right .box .row .post-actions .p-btn:hover{
     background: #303031;
+}
+
+.profile-container .profile-main .right .box .row .post-actions i{
+    font-size: 20px;
+    color: white;
+}
+
+.profile-container .profile-main .right .box .row .post-actions .like-post{
+    font-size: 20px;
+    color: blue;
 }
 
 .profile-container .profile-main .right .box .row .write-comment{
@@ -466,5 +476,104 @@ hr {
         background: #3a3b3c;
         border-radius: 69px;
         padding: 1px;
+        color: white;
         padding-left: 14px;
+}
+.post-comment-container{
+    height: 275px;
+    overflow-y: scroll;
+    display: none;
+}
+.post-comment-container .comment-message .comment-message-header{
+    display: flex;
+}
+.post-comment-container .comment-message img{
+    width: 9%;
+    padding: 14px;
+    border-radius: 50%;
+    height: 53px;
+}
+.post-comment-container .comment-message .message{
+    background-color: rgb(58, 59, 60);
+    border-radius: 25px;
+    margin-right: 38px;
+    padding: 10px;
+}
+.post-comment-container .comment-message .message a{
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+    padding: 6px 0px 0px 10px;
+}
+.post-comment-container .comment-message .message p{
+    padding: 2px 0px 2px 4px;
+}
+.post-comment-container .comment-message .comment-footer ul{
+    display: flex;
+    margin-left: 16%;
+}
+.post-comment-container .comment-message .comment-footer li{
+    list-style: none;
+    cursor: pointer;
+    margin-bottom: 15px;
+    font-size: 12px;
+    margin-right: 3%;
+} 
+
+#row{
+    border-bottom: 1px solid gray;
+    margin-bottom: 16px;
+    margin-left: 15px;
+    width: 91%;
+}
+.not-visible{
+    display: none;
+}
+.visible{
+    display: block;
+}
+.post-operation-list{
+    background: #242526;
+    position: absolute;
+    padding: 6px;
+    display: none;
+    cursor: pointer;
+    width: 23%;
+    margin: 3% 0% 6% 7%;
+    border-radius: 9px;
+}
+.post-operation-list ul {
+    padding: 5px 0px 0px 0px;
+    margin: 7px 4px 6px 0px;
+}
+.post-operation-list ul .post-row{
+    height: 35px;
+    margin-bottom: 12px;
+    padding-left: 28px;
+    border-radius: 5px;
+    margin-left: 6px;
+    width: 90%;
+}
+
+.post-operation-list ul .post-row:hover{
+    background-color: #3a3b3c;
+    transition: 0.4s ease-out;
+}
+.post-operation-list ul .post-row li{
+    color: white;
+    font-size: 16px;
+    padding-top: 5px;
+    list-style: none;
+}
+
+.post-operation-list ul .post-row li i{
+    margin-left: -23px;
+    margin-top: 5px;
+    margin-right: 14px;
+}
+.readmore{
+    cursor: pointer;
+}
+.readless{
+    cursor: pointer;
 }

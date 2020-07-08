@@ -16,47 +16,105 @@ if(isset($_POST['biocontent'])){
 <?php
 /////// display profile post
 include ('dbconf.php');
-if(isset($_POST['start'] , $_POST['limit'])){
+;if(isset($_POST['start'] , $_POST['limit'])){
     $user_data = getuser_info($_SESSION['friendbook']);
    $user_id = $user_data['user_id'];
-  $query = "SELECT * FROM user_post WHERE user_id='$user_id' ORDER BY post_id DESC LIMIT ".$_POST["start"]." , ".$_POST["limit"]." ";
+   $user_img = $user_data['user_img'];
+   $res = "";
+  $query = "SELECT * FROM user_post WHERE user_id='$user_id' AND post_active='1' AND hide_timeline='1' ORDER BY post_id DESC LIMIT ".$_POST["start"]." , ".$_POST["limit"]."";
    $res = mysqli_query($conn,$query);
    while($row = mysqli_fetch_assoc($res)){
-       $content = $row['post_content'];
        $fullcontnt = $row['post_content'];
+       $id = $row['post_id'];
+       $content = $row['post_content'];
        if(strlen($content) > 300){
-       $content = substr($content,0,300).'.... <span onClick="readmore()" id="Readmore">Readmore</span>';
+       $content = substr($content,0,300).'.... <span class="readmore" id="Readmore'.$id.'">Readmore</span>';
     }
+    if(userlike($id))
+        $likeclass = "like-post";
+    else
+        $likeclass = "fa-notlike";
+        
+    $comment_res = mysqli_query($conn,"SELECT * FROM comment WhERE post_id='$id' ORDER BY id DESC");
+    $comment_count = mysqli_num_rows($comment_res);
+    $like = mysqli_query($conn,"SELECT * FROM like_table WHERE post_id='$id'");
+    $count_like = mysqli_num_rows($like);
        $img = ($row['post_img'] != 'NULL') ? $row['post_img'] : "";
-       echo '   <div class="row">              
+       echo ' <div class="row" id="row'.$id.'">              
        <div class="post-header">
-       <img src="img/avatar7.png" alt="">
-       <a href="#" id="name">'.$user_data['username'].'</a><span>...</span>
+       <div class="post-operation-list" style="" id="'.$id.'">
+       <ul>
+           <div class="post-row" onClick="deletepost('.$id.')">
+               <li><i class="fa fa-trash" aria-hidden="true"></i> Delete Post</li>
+           </div>
+           <div class="post-row" onClick="editpost('.$id.')">
+               <li> <i class="fa ser fa-pencil"></i> Edit Post</li>
+           </div>
+           <div class="post-row" onClick="hidetimelinepost('.$id.')">
+               <li><i class="fa fa-eye-slash" aria-hidden="true"></i>Hide From Timeline</li>
+           </div>
+           <div class="post-row">
+           <li><i class="fa fa-times" aria-hidden="true"></i>Cancel</li>
+       </div>
+       </ul>
+   </div>
+       <img src="userimages/'.$user_img.'" alt="">
+       <a href="#" id="name">'.$user_data['username'].'</a><span id="more-operation'.$id.'">...</span>
        <p id="time">'.$row['post_date'].'</p>
    </div>
    <div class="post-text">
-       <p id="normal-text">'.$content.'</p>
-       <p id="read-more-p">'.$fullcontnt.'</p>
-
+       <p id="normal-text'.$id.'">'.$content.'</p>
+       <p id="full-text'.$id.'" style="display:none;">'.$fullcontnt.'...<span class="readless" id="Readless'.$id.'">ReadLess</span>'.'</p>
    </div>
    <div class="img">
-       <img src="userimages/'.$img.'" alt="">
+   <img id="post_img'.$id.'" src="userimages/'.$img.'" alt="">
    </div>
    <div class="post-counts">
-       <span id="likes">100 likes</span><span id="comment">50 Comments</span> <span id="share">20
+       <span id="likes" class="likes'.$id.'">'.$count_like.' likes</span><span onClick="commentsection('.$id.')" class="comment'.$id.'" id="comment">'.$comment_count.' Comments</span> <span id="share">20
            shares</span>
    </div>
    <hr>
    <div class="post-actions">
-       <button class="p-btn">Like</button>
-       <button class="p-btn">Comment</button>
-       <button class="p-btn">Share</button>
+       <button class="p-btn" onClick="likepost('.$id.')" ><i id="like-btn-'.$id.'" class="fa fa-thumbs-up '.$likeclass.'" aria-hidden="true"></i> Like</button>
+       <button onClick="commentsection('.$id.')" class="p-btn"> <i class="fa fa-comments-o" aria-hidden="true"></i> Comment</button>
+       <button class="p-btn"><i class="fa fa-share-alt" aria-hidden="true"></i>  Share</button>
    </div>
    <hr>
    <div class="write-comment">
-       <img src="img/avatar7.png" alt="">
-       <input type="text" placeholder="Write a comment">
-   </div></div>';
+   <img src="userimages/'.$user_img.'" alt="comment-img">
+   <input type="text" id="comment-text-'.$id.'" placeholder="Write a comment">
+    </div>
+    '; if($comment_count > 0) { echo '
+   <div class="post-comment-container" id="post-comment-container'.$id.'">
+   <div id="row"></div>
+  '; 
+ }; echo '
+</div>
+    </div>
+</div>
+   <script>
+   $("#comment-text-'.$id.'").keyup(function(e){
+    if (e.keyCode == 13) {
+       value =  $("#comment-text-'.$id.'").val();
+       addcomment('.$id.',value);
+    }
+   })
+   $("#Readmore'.$id.'").click(function(){
+       $("#normal-text'.$id.'").css("display","none")
+       $("#full-text'.$id.'").css("display","block")
+   })
+   $("#Readless'.$id.'").click(function(){
+    $("#full-text'.$id.'").css("display","none")
+    $("#normal-text'.$id.'").css("display","block")
+   })
+   $("#more-operation'.$id.'").click(function(){
+       $("#'.$id.'").fadeToggle();
+       $(".post-row").on("click",function(){
+           $("#'.$id.'").fadeOut();       
+       })
+   })
+   </script>
+   ';
    }
 
 }
@@ -64,14 +122,31 @@ if(isset($_POST['start'] , $_POST['limit'])){
 
 <?php
 if(isset($_POST['deletepic'])){
+    ////////////////////////// delete profile and cover pic
     $where = $_POST['deletepic'];
     $user_data = getuser_info($_SESSION['friendbook']);
     $user_id = $user_data['user_id'];
     $sql = "";
+    $reddata = mysqli_query($conn,"SELECT * FROM registration WHERE user_id='$user_id'");
+    $dataarr = mysqli_fetch_assoc($reddata);
+    $dbpicimg = $dataarr['user_img'];
+    $dbcoverimg = $dataarr['user_cover_img'];
     if($where == 'cover'){
+        echo "cober";
         $sql = "UPDATE registration SET user_cover_img='blackbener.jpg' where user_id='$user_id'"; 
+        if($dbcoverimg != 'blackbener.jpg'){
+            echo "fund";
+            echo $dbpicimg;
+            unlink('../userimages/'.$dbcoverimg);   
+        }
     }else if($where == 'profile'){
+        echo "profile";
         $sql = "UPDATE registration SET user_img='temp-user.png' where user_id='$user_id'"; 
+        if($dbpicimg != 'temp-user.png'){
+            echo "fund";
+            echo $dbcoverimg;
+            unlink('../userimages/'.$dbpicimg);   
+        }
     }else{
         echo "error";
     }
@@ -80,6 +155,7 @@ if(isset($_POST['deletepic'])){
 }
 
 if(isset($_POST['where']) || isset($_FILES['picname'])){
+    ///////////////////////// uplad profile or cover pic
     $where = $_POST['where'];
     $picname = $_FILES['picname']['name'];
     $imgarr = explode(".",$picname);
@@ -102,4 +178,167 @@ if(isset($_POST['where']) || isset($_FILES['picname'])){
          echo "error";
     }
 }
+?>
+
+<?php
+////////delete post
+if(isset($_POST['deletepst'])){
+    $id = $_POST['deletepst']; 
+    $data = mysqli_query($conn,"SELECT *  FROM user_post WHERE post_id='$id'");
+    $dataarr = mysqli_fetch_assoc($data);
+    $res = mysqli_query($conn,"DELETE FROM user_post WHERE post_id='$id'");
+    $img = $dataarr['post_img'];
+    if($res){
+        if(file_exists('../userimages/'.$img)){
+              unlink('../userimages/'.$img);   
+        }
+    }
+}
+?>
+
+<?php
+//////hide timeline post
+if(isset($_POST['hidetimeline'])){
+    $id = $_POST['hidetimeline'];
+    $res = mysqli_query($conn,"UPDATE user_post SET  hide_timeline='0' WHERE post_id='$id'");
+}
+?>
+
+<?php
+/////////////////// Edit And Updaet Post Code
+if(isset($_POST['edit_post_id'])){
+    $id = $_POST['edit_post_id'];
+    $res = mysqli_query($conn,"SELECT * FROM user_post WHERE post_id='$id' AND  hide_timeline='1'");
+    $arr = mysqli_fetch_array($res);
+    $data = json_encode($arr);
+    echo $data;
+}
+?>
+<?php
+////////////////// edit post
+if(isset($_FILES['editimagefile']) ||  isset($_POST['editcontent'])){
+    $content = mysqli_real_escape_string($conn,$_POST['editcontent']);
+    $post_id = $_POST['post_id'];
+    $time = time();
+    $img = "NULL";
+    $res = mysqli_query($conn,"SELECT * FROM user_post WHERE post_id='$post_id'");
+    $data = mysqli_fetch_assoc($res);
+    $db_img_name = $data['post_img'];
+    $data = getuser_info($_SESSION['friendbook']);
+    $id = $data['user_id'];
+    if(isset($_FILES['editimagefile']['name'])){
+        $img =  $_FILES['editimagefile']['name'];
+        move_uploaded_file($_FILES["editimagefile"]["tmp_name"],"../userimages/".$img);
+    }
+    if($img == "NULL"){
+           $img = $db_img_name;  
+    }
+    if($img != "NULL" && $img != $db_img_name){
+        unlink("../userimages/".$db_img_name);
+    }
+     $sql = "UPDATE user_post SET post_content='$content' , post_img='$img' , time='$time' WHERE post_id='$post_id'";
+     $res = $conn->query($sql);
+     echo $img;
+}
+?>
+
+
+<?php
+/////////////////////////////////////////////////////////////////////// add comment
+if(isset($_POST['post_id'] , $_POST['comment_text'])){
+    $p_id = $_POST['post_id'];
+    $text = mysqli_real_escape_string($conn,$_POST['comment_text']);
+    $time = time();
+    $data = getuser_info($_SESSION['friendbook']);
+    $id = $data['user_id'];
+    $sql = "INSERT INTO `comment`(`post_id`, `user_id`, `comment_content`,`numarical_time`, `parent`) VALUES ('$p_id','$id','$text','$time','NULL')";
+    $res = mysqli_query($conn,$sql);
+    echo getcommentcount($p_id);
+}
+
+//////////////////////////////////////////get comment counr
+function getcommentcount($postid){
+    global $conn;
+    $ratting = array();
+    $countcom = "SELECT count(*) FROM `comment` WHERE `post_id` = '$postid' and `is_display` = '1'";
+    $comres = mysqli_query($conn,$countcom);
+    $likearr = mysqli_fetch_array($comres);
+    $comment_data = ['commentcount'=> $likearr[0]];
+    return json_encode($comment_data);
+}
+
+?>
+
+<?php
+if(isset($_POST['comment_id'])){
+    $comid = $_POST['comment_id'];
+    $comment_res = mysqli_query($conn,"SELECT * FROM comment WhERE post_id='$comid' ORDER BY id DESC");
+    while ($comrow = mysqli_fetch_assoc($comment_res)) {
+        $user_id = $comrow['user_id'];
+        $user_res = mysqli_query($conn,"SELECT * FROM registration WHERE user_id='$user_id'");
+        $userdata = mysqli_fetch_assoc($user_res);
+        echo ' <div class="comment-message">
+        <div class="comment-message-header">
+           <img src="userimages/'.$userdata['user_img'].'" alt="userimg">
+            <div class="message">
+                <a href="#">'.ucfirst($userdata['username']).'</a>
+                <p>'.$comrow['comment_content'].'</p>
+            </div>
+        </div>
+        <div class="comment-footer">
+            <ul>
+                <li>Like</li>
+                <li>Reply</li>
+                <li>'.get_time_ago($comrow['numarical_time']).'</li>
+            </ul>
+        </div>
+      </div>
+      ';
+    };
+}
+?>
+
+<?php 
+///////////////////////////////////////////////// like code
+if(isset($_POST['like_action'], $_POST['post_id'])){
+    $action = $_POST['like_action'];
+    $p_id = $_POST['post_id'];
+    $user_data = getuser_info($_SESSION['friendbook']);
+    $user_id = $user_data['user_id'];
+    
+    switch($action){
+        case 'like':
+            $sql = "INSERT INTO `like_table`(`user_id`, `post_id`, `action`) VALUES ('$user_id','$p_id','$action')
+              ON DUPLICATE KEY UPDATE action='like'";
+            break;
+        case 'unlike':
+            $sql = "DELETE FROM like_table WHERE user_id='$user_id' AND post_id='$p_id' AND is_active='1'";
+            break;
+        default:
+            break;
+    }
+    $res = mysqli_query($conn,$sql);
+    echo getratting($p_id);
+    exit(0);
+}
+
+function getratting($postid){
+    global $conn;
+    $ratting = array();
+    $likeq = "SELECT count(*) FROM `like_table` WHERE `post_id` = '$postid' and `action` = 'like'";
+    $likeres = mysqli_query($conn,$likeq);
+    $likearr = mysqli_fetch_array($likeres);
+    $ratting = ['likes'=> $likearr[0]];
+    return json_encode($ratting);
+}
+
+function userlike($id){
+    global $conn;
+    global $user_id;
+    $qur5 = mysqli_query($conn,"SELECT * FROM `like_table` WHERE post_id = '$id' and `user_id` = '$user_id' and `action` = 'like'");
+    if(mysqli_num_rows($qur5) > 0){
+         return true;
+    }else{
+        return false;
+}}
 ?>

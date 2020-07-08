@@ -20,7 +20,7 @@ body{
     display: flex;
     height: 103px;
     width: 95%;
-    margin: 2px;
+    margin: 1% 2px;
     color: white;
 }
 .serch-box-main .friend-box .tags{
@@ -45,6 +45,11 @@ body{
     margin: 5px 0px 5px 15px;
     font-size: 13px;
     color: #7f7faa; 
+}
+.serch-box-main #time-sec-p{
+    position: absolute;
+    margin: -23px 0px 0px 8%;
+    color: white;
 }
 .more{
     background: #242526;

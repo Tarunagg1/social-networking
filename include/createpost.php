@@ -10,15 +10,18 @@
         <form action="" method="post" id="createpost" enctype="multipart/form-data">
             <div class="modal-body">
                 <div class="post-user-data">
-                    <img src="img/avatar7.png" alt="">
-                    <p>Tarun Aggarwal</p>
+                    <img src="userimages/<?php echo $data['user_img']; ?>" alt="">
+                    <p><?php echo ucfirst($name); ?></p>
                 </div>
                 <div class="model-con">
-                    <textarea name="postcontent" id="postcontent"  placeholder="what's on your mind, Tarun"></textarea>
+                    <textarea style="height: 120px;" name="postcontent" id="postcontent"  placeholder="what's on your mind, <?php echo ucfirst($name) ?>"></textarea>
+                </div>
+                <div class="add-post">
+                    <img style="width: 91%; margin-left: 8px; height: 187px;" id="add-image" src="" alt="">
                 </div>
                 <div class="post-graphics">
                     <span>Add With Your post</span>
-                    <input  id="add-image-temp" type="button" value="Add Image"><span id="file-name">File Name</span>
+                    <input  class="add-image-temp" id="add-image-temp" type="button" value="Add Image"><span id="file-name">File Name</span>
                     <input type="file" hidden="hidden" id="postimage" name="postimage" onchange="return imagevalidate()">
                 </div>
             </div>

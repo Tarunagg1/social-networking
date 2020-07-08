@@ -1,7 +1,7 @@
 <div class="left">
             <div class="tab" id="tab">
-                <img src="img/avatar7.png" alt="">
-                <p>Tarun Aggarwal</p>
+            <img src="userimages/<?php echo $user_img; ?>" alt="User img">
+                <p><?php echo ucfirst($name); ?></p>
             </div>
             <div class="tab">
                 <i class="fa fa-bell" aria-hidden="true">

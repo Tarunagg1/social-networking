@@ -29,14 +29,3 @@ document.getElementById("add-image-temp").addEventListener('click',function(){
  })
 
  
-////////////// user bio
-form = document.getElementById('form-bio')
-document.getElementById('addbio').addEventListener('click', function() {
-    form.style.display = "block";
-})
-document.getElementById('save-bio').addEventListener('click', function() {
-    form.style.display = "none";
-});
-document.getElementById('cancel-bio').addEventListener('click', function() {
-  form.style.display = "none";
-});

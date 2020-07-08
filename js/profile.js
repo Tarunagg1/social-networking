@@ -1,3 +1,35 @@
+////////////////serch 
+$(document).ready(function () {
+    $('#serch-textbox').keyup(function () {
+        serchval = $('#serch-textbox').val()
+        if (serchval != 0) {
+            $.ajax({
+                url: "include/backend1.php",
+                method: "POST",
+                data: { serchval: serchval },
+                success: function (data) {
+                    $('#serch-list').fadeIn();
+                    $('#serch-ul').html(data);
+                }
+            });
+        } else {
+            $('#serch-list').fadeOut();
+        }
+    });
+    $(document).on('click', '.serch-item', function (e) {
+        $('#serch-textbox').val($(this).text());
+        $('#serch-list').fadeOut();
+        serchval = $('#serch-textbox').val()
+        window.location = `serch.php?q=${serchval}`
+    });
+    $('#serch-textbox').keyup(function (e) {
+        if (e.keyCode == 13) {
+            window.location = `serch.php?q=${serchval}`
+        }
+    });
+});
+
+
 /////////////////////fetch data
 $(document).ready(function () {
     var limit = 2;
@@ -9,7 +41,7 @@ $(document).ready(function () {
             method: 'POST',
             data: {
                 limit: limit,
-                start: start
+                start: start,
             },
             cache: false,
             success: function (data) {
@@ -32,7 +64,7 @@ $(document).ready(function () {
         if ($(window).scrollTop() + $(window).height() > $("#load_data").height() && action == 'inactive') {
             action = 'active';
             start = start + limit;
-            setTimeout(function () {
+            setTimeout(function () {                
                 load_data(limit, start)
             }, 1000);
         }
@@ -40,7 +72,16 @@ $(document).ready(function () {
 
 });
 
-///////////////add Post
+/////////////// create Post
+$('#postimage').on("change", function () {
+    const file = this.files[0];
+    const reader = new FileReader();
+    reader.onload = function (e) {
+        $('#add-image').attr('src', e.target.result)
+    }
+    reader.readAsDataURL(this.files[0])
+})
+
 $('#createpost').on('submit', function (e) {
     e.preventDefault();
     var property = document.getElementById('postimage').files[0];
@@ -81,6 +122,7 @@ $('#createpost').on('submit', function (e) {
 });
 
 ///////////////////////save bio
+
 $(document).ready(function () {
     $('#save-bio').prop('disabled', true)
     $("#bio-text").keyup(function () {
@@ -155,12 +197,31 @@ $('#profile-uploder').on('change', function () {
                     alert("Some Error")
                 } else {
                     $('#profilepic').attr("src", "userimages/" + data)
+                    $('#send-post-img').attr("src", "userimages/" + data)
                 }
             }
         })
     }
 
 })
+
+function imagevalidate() {
+    var property = document.getElementById('postimage').files[0];
+    var imgename = property.name;
+    var img_exe = imgename.split('.').pop().toLowerCase();
+    var img_size = property.size;
+    if (jQuery.inArray(img_exe, ['img', 'jpg', 'png', 'jpeg']) == -1) {
+        alert("Please Upload File having jpg Png jpeg or img");
+        $('#postbutton').prop('disabled', true);
+    } else if (img_size > 2000000) {
+        alert("Too Large Uploar Less Then 3 Mb");
+        $('#postbutton').prop('disabled', true);
+    } else {
+        $('#postbutton').prop('disabled', false);
+        $('#file-name').text()
+    }
+}
+
 ////////////////////edit cover
 $('#edit-cover-pic').on('click', function () {
     $('#cover-pic-list').fadeToggle();
@@ -203,6 +264,7 @@ $('#delete-profile-pic').click(function () {
         data: { deletepic: "profile" },
         success: function (data) {
             $("#profilepic").attr("src", "userimages/temp-user.png");
+            $("#send-post-img").attr("src", "userimages/temp-user.png");
         }
     })
 })
@@ -220,7 +282,190 @@ $('#delete-cover-pic').click(function () {
 $('#upload-cover-pic').on('click', function () {
     $('#cover-uploder').click();
 })
+
 $('#upload-profile-pic').on('click', function () {
     $('#profile-uploder').click();
 })
 
+function deletepost(id) {
+    $("#row" + id).css("display", "block")
+    confres = confirm("Are You Really Want to delete This Post")
+    if (confres) {
+        $.ajax({
+            url: "include/profile.php",
+            method: "post",
+            data: { deletepst: id },
+            success: function (data) {
+                $("#row" + id).hide();
+            }
+        })
+    }
+}
+
+function hidetimelinepost(id) {
+    retval = "";
+    $.ajax({
+        url: "include/profile.php",
+        method: "post",
+        data: { hidetimeline: id },
+        success: function (data) {
+            $("#row" + id).hide();
+        }
+    })
+}
+
+function editpost(id) {
+    ///////////////////edit post data
+    $.ajax({
+        url: "include/profile.php",
+        method: "post",
+        data: { edit_post_id: id },
+        dataType: "JSON",
+        success: function (data) {
+            if (data != '') {
+                $('#editmyModal').css("display", "block");
+                $('#editpostcontent').val(data['post_content'])
+                $('#editpostid').val(data['post_id']);
+                $('#post-image').attr("src", "userimages/" + data['post_img'])
+                $('#editfile-name').text(data['post_img'])
+                $('#edit-image-temp').on('click', function () {
+                    $('#editpostimage').click();
+                })
+                $('#editpostimage').on("change", function () {
+                    var property = document.getElementById('editpostimage').files[0];
+                    var imgename = property.name;
+                    var img_exe = imgename.split('.').pop().toLowerCase();
+                    var img_size = property.size;
+                    if (jQuery.inArray(img_exe, ['img', 'jpg', 'png', 'jpeg']) == -1) {
+                        alert("Please Upload File having jpg Png jpeg or img");
+                        $('#editpostbutton').prop('disabled', true);
+                    } else if (img_size > 2000000) {
+                        alert("Too Large Uploar Less Then 3 Mb");
+                        $('#editpostbutton').prop('disabled', true);
+                    } else {
+                        $('#editpostbutton').prop('disabled', false);
+                        $('#edit-image-temp').text(imgename)
+                        const file = this.files[0];
+                        const reader = new FileReader();
+                        reader.onload = function (e) {
+                            $('#post-image').attr('src', e.target.result)
+                            //$('#editfile-name').text(file)
+                        }
+                        reader.readAsDataURL(this.files[0])
+                    }
+                })
+            }
+        }
+    })
+    var modal = document.getElementById("editmyModal");
+    $('.close').click(function () {
+        $('#editmyModal').css("display", "none")
+    })
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            $('#editmyModal').css("display", "none")
+        }
+    }
+
+}
+
+
+////////////////////// edit form submit
+$('#editpost').on('submit', function (e) {
+    e.preventDefault();
+    var property = document.getElementById('editpostimage').files[0];
+    content = $('#editpostcontent').val();
+    id = $('#editpostid').val();
+    var edit_form_data = new FormData();
+    edit_form_data.append("editimagefile", property);
+    edit_form_data.append("editcontent", content);
+    edit_form_data.append("post_id", id);
+    $.ajax({
+        url: "include/profile.php",
+        type: 'post',
+        data: edit_form_data,
+        contentType: false,
+        cache: false,
+        processData: false,
+        beforeSend: function () {
+            $('#editpostbutton').prop('disabled', true);
+            $('#editpostbutton').val('Please Wait....');
+        },
+        success: function (data) {
+            console.log(data);
+            if (data == 0) {
+                alert("SomeThing Went To Wrong Try Again")
+            } else {
+                $("#normal-text"+id).text(content)
+                $("#post_img"+id).attr("src","userimages/"+data)
+                $('#editpostbutton').prop('disabled', false);
+                $('#editpostbutton').val('Update Post');
+                var modal = document.getElementById("editmyModal");
+                modal.style.display = "none";
+            }
+        },
+        error: function () {
+            alert("error is accured");
+        }
+    });
+});
+
+function addcomment(id, value) {
+    if (id != "" && value != "") {
+        $.ajax({
+            url: "include/profile.php",
+            type: 'post',
+            data: { post_id: id, comment_text: value },
+            success: function (data) {
+                res = JSON.parse(data)
+                $(".comment"+id).text(res.commentcount+" Comment");
+                $("#comment-text-" + id).val("")
+                commentsection(id);
+            }
+        })
+    } else {
+        console.log("enter some text");
+    }
+}
+function commentsection(id) {
+    if (id != "") {
+        $.ajax({
+            url: "include/profile.php",
+            type: 'post',
+            data: {comment_id:id},
+            success: function (data) {  
+                $("#post-comment-container"+id).html(data);
+            }
+        })
+    } else {
+        console.log("enter some text");
+    }
+    $("#post-comment-container"+id).fadeToggle();
+}
+
+
+function likepost(id){
+    ///////////////////////////////////////////////////// post like ddislike post
+    btn = $("#like-btn-"+id);
+    if(btn.hasClass('fa-notlike')){
+        action = "like";
+    }else if(btn.hasClass('like-post')){
+        action = "unlike"
+    }    
+    $.ajax({
+        url: "include/profile.php",
+        type:"post",
+        data:{'like_action':action,'post_id':id},
+        success:function(data){
+            res = JSON.parse(data);
+            if(action === 'like'){
+                btn.removeClass('fa-notlike');
+                btn.addClass('like-post');
+            }else if(action === 'unlike'){
+                btn.removeClass('like-post');
+                btn.addClass('fa-notlike');
+            }
+             $(".likes"+id).text(res.likes+" Likes");
+        }
+    })
+}
