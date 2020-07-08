@@ -1,0 +1,214 @@
+body{
+    background-color: #18191a;
+}
+.container .left {
+   background-color: #242526;
+}
+.container .left .tab {
+   border: 2px solid #242526;
+}
+
+.seprator {
+   margin: -5px 0px 12px 29px;
+   width: 92%;
+   border-bottom: 1px solid #3e4042;
+}
+
+.container .left .tab:hover {
+    background-color: #3a3b3c;
+    border: 2px solid #3a3b3c;
+}
+.container .left .tab {
+    padding: 12px;
+    flex-direction: column;
+    width: 85%;
+    border: 2px solid #242526;
+    border-radius: 19px;
+    margin-left: 4px;
+}
+
+.container .left .tab p {
+    margin-left: 61px;
+    margin-top: -44px;
+    color: white;
+    font-weight: bolder;
+    width: 100%;
+    font-style: initial;
+    font-size: 15px;
+}
+.seprator {
+    margin: 1px 0px 0px 9px;
+    width: 89%;
+    border-bottom: 1px solid #3e4042;
+}
+
+.left h1{
+    color: white;
+    font-size: 23px;
+    cursor: auto;
+    margin-left: 18px;
+}
+.left h5{
+    color: white;
+    cursor: auto;
+    margin: 9px 15px;
+}
+.left h4{
+    margin: 14px 17px;
+    cursor: auto;
+    color: white;
+}
+.left a{
+    color: #2b6dc3;
+    text-decoration: none;
+}
+.left .tab .buttons {
+    margin-top: 16px;
+    margin-left: 37px;
+    display: flex;
+}
+.left .tab .buttons .btn{
+    height: 35px;
+    width: 50%;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 15px;
+    margin-left: 4px;
+    background: #2d88ff;
+    color: white;
+    font-weight: 700;
+    border: 1px solid #2d88ff;
+    outline: none;
+    padding: 5px;
+}
+.left .tab .buttons .delete{
+    background-color: #303031;
+    border: 1px solid #303031;
+}
+.left .tab .buttons .cancelreq{
+    background-color: firebrick;
+    border: 1px solid firebrick;
+}
+.left .tab .buttons .reqrecive{
+    cursor: not-allowed;
+    background-color: green;
+    border: 1px solid green;
+}
+
+
+.middle-friend-container{
+    width: 78%;
+    color: white;
+    margin-left: 22%;
+}
+.middle-friend-container .not-provide-id{
+    margin: 25% 0% 0% 29%;
+}
+.middle-friend-container .not-provide-id i{
+    color: #7a7d81;
+    margin-left: 160px;
+    font-size: 84px;
+}
+.middle-friend-container .not-provide-id p{
+   color: #8eb3b8;   
+   font-size: 22px;
+   font-weight: 700;
+   font-family: sans-serif;
+}
+
+
+
+/* //////////////////////////////////////// */
+.profile-pics .profile-pic .cover-pic img {
+    height: 357px;
+    border-radius: 12px;
+    margin-left: 12%;
+    width: 74%;
+}
+
+.profile-pics .profile-pic .profile img {
+    position: absolute;
+    border-radius: 50%;
+    border: 7px solid black;
+    height: 170px;
+    width: 170px;
+    margin: -186px 0px 0px 32%;
+}
+
+.profile-container .pic-buttom h5 {
+    text-align: center;
+    font-size: 15px;
+    margin-bottom: 17px;
+    margin-top: 10px;
+}
+
+.pic-buttom .pic-buttom-last-header .division {
+    width: 76%;
+    display: flex;
+    margin-left: 5%;
+    height: 50px;
+}
+
+.pic-buttom .pic-buttom-last-header .division .first {
+    color: #acafb4;
+    margin-top: 3px;
+}
+.pic-buttom .pic-buttom-last-header .division .second {
+    width: 40%;
+    margin-top: 6px;
+}
+
+.profile-container .profile-main {
+    display: flex;
+    width: 83%;
+    color: white;
+    margin-top: 20px;
+    margin-left: 6%;
+}
+
+.profile-container .profile-main .left {
+    width: 37%;
+    overflow: hidden;
+    background-color: #18191a;
+    color: white;
+}
+
+.profile-container .profile-main .right {
+    width: 51%;
+    background-color: #18191a;
+    margin-left: 2%;
+}
+
+/* //////////////////////////////////////////////////////////// loca profile */
+
+.middle-friend-container .not-found{
+    margin: 15% 42% 0% 23%;
+}
+.middle-friend-container .not-found i{
+    font-size: 105px;
+    margin-left: 38%; 
+    color: #90c3ff;
+}
+.middle-friend-container .not-found h1{
+    color: #6191b8;
+    font-size: 23px;
+    margin: 4px;
+    font-weight: lighter;
+    font-family: sans-serif;
+}
+.middle-friend-container .not-found p{
+    cursor: #8eb3b8;
+}
+.middle-friend-container .not-found a{
+     color: #4589c4;
+     text-decoration: none;
+    font-weight: bolder;
+    text-align: center;
+    margin-left: 39%;
+}
+
+#load_data_friend_msg img{
+    height: 74px;
+    margin: 0px 0px 20px 37%;
+    width: 70px;
+} 
