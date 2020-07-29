@@ -59,8 +59,7 @@ if(isset($_POST['logusername'])){
     sleep(5);
      $email = $_POST['logusername'];
      $pass= md5($_POST['logpassword']);
-
-     $email_check = "SELECT * FROM  registration WHERE user_email='$email' limit 1";
+     $email_check = "SELECT * FROM  registration WHERE user_email='$email' OR username='$email' limit 1";
      $data_email = mysqli_query($conn,$email_check);
      if(mysqli_num_rows($data_email) == 1){
         $row = mysqli_fetch_assoc($data_email);
@@ -72,6 +71,7 @@ if(isset($_POST['logusername'])){
         }elseif($dbis_active == 0){
               echo "your account is not active";
         }else{
+            mysqli_query($conn,"UPDATE registration SET user_login='1' WHERE user_email='$dbemail'");
             $_SESSION['friendbook'] = $dbemail;
         }
     }else{
@@ -97,5 +97,34 @@ $data = getuser_info($_SESSION['friendbook']);
     $id = $data['user_id'];
      $sql = "INSERT INTO `user_post`(`user_id`, `post_content`, `time`,`post_img`) VALUES ('$id','$content','$time','$img')";
     $res = $conn->query($sql);
+}
+?>
+
+<?php
+////////////////////////////////////////////////////////////////////////////  firnd froiend
+if(isset($_POST['loadfriend'])){
+    $user_data = getuser_info($_SESSION['friendbook']);
+    $user_id = $user_data['user_id'];
+    $sq = "SELECT * FROM friend_table WHERE user_from='$user_id' OR user_to='$user_id' AND 	status='friend'";
+    $data1 = mysqli_query($conn,$sq);
+    while($row = mysqli_fetch_array($data1)){
+        $fromid = $row['user_from']; 
+        $to_id = $row['user_to'];
+        $finalid =  ($fromid == $user_id) ? $to_id : $fromid;
+        $q = mysqli_query($conn,"SELECT * FROM `message` WHERE `sender_id`='$finalid' AND `reciver_id`='$user_id' AND `status`='unread'");
+        $msgcount = mysqli_num_rows($q);
+        $counttemplate = (mysqli_num_rows($q) > 0) ? "<h5 id='msgcount'>$msgcount</h5>": '';
+        $userq = mysqli_query($conn,"SELECT * FROM registration WHERE user_id='$finalid'");
+        $user_data = mysqli_fetch_array($userq);
+        $userlogdata;
+        if($user_data['user_login'] == 1)
+            $userlogdata = "Active";
+        else
+            $userlogdata = get_time_agosort($user_data['user_lastseen']);
+        echo '<div class="users" onClick="createchatbox('.($user_data['user_id']+100).','.$row['id'].')" id="user'.$user_data['user_id'].'">
+        <img src="userimages/'.$user_data['user_img'].'" alt="">
+        <p>'.$user_data['username'].''.$counttemplate.'</p><span>'.$userlogdata.'</span>
+    </div>';
+    }
 }
 ?>

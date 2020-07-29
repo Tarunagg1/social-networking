@@ -39,11 +39,15 @@ while ($row1 = mysqli_fetch_assoc($data1)) {
     $normaluid = $row1['user_id'];
     $uid = $row1['user_id'] += 100;
     $check_req_recive = mysqli_query($conn,"SELECT * FROM friend_request WHERE 	from_id='$user1_id' AND to_id='$normaluid' AND status='unaprove' OR from_id='$normaluid' AND to_id='$user1_id' AND status='unaprove'");
+    $skipusers = mysqli_query($conn,"SELECT * FROM friend_table  WHERE user_from='$normaluid' AND user_to='$user1_id' AND status='friend' OR user_from='$user1_id' AND user_to='$normaluid' AND status='friend'");
+    if(mysqli_num_rows($skipusers) == 1){
+        continue;
+    }
 ?>
+
 <a href="friend.php?id=<?php echo $uid; ?>">
     <div class="tab" id="tab<?php echo $uid; ?>">
-        <img src="userimages/<?php if($row1['user_img'] == "" || $row1['user_img']== "NULL"){ echo"temp-user.png"; } else { echo $row1['user_img'] ;} ?>"
-            alt="Not found">
+        <img src="userimages/<?php if($row1['user_img'] == "" || $row1['user_img']== "NULL"){ echo"temp-user.png"; } else { echo $row1['user_img'] ;} ?>" alt="Not found">
         <p><?php echo $row1['username']; ?></p>
 </a>
 <div class="buttons">

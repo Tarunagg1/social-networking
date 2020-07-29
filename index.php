@@ -20,7 +20,7 @@ session_start();
             <h1>FriendBook</h1>
         </div>
         <div class="second-half">
-            <span>Email</span>
+            <span>Email Or Username</span>
             <div class="sm-view">
                 <form action="" id="loginform" method="post">
                     <input type="text" placeholder="Enter Email" name="logusername" id="logid" required>

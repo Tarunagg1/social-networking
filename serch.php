@@ -28,8 +28,9 @@ define("title", "Serch User");
     border-bottom: 1px solid #3e4042;
 }
 </style>
+
 <body>
-<?php 
+    <?php 
 include_once('include/dbconf.php');
 include('include/dbconf.php');
 $start_time = microtime(true);
@@ -49,7 +50,8 @@ if(isset($_GET['q'])){
         <?php include('include/home-leftsidebar.php') ?>
     </div>
     <div class="serch-box-main">
-        <h2>People</h2><p id="time-sec-p">About <?php echo $total; ?> Result In (<?php echo $execution_time ?> Seconds)</p>
+        <h2>People</h2>
+        <p id="time-sec-p">About <?php echo $total; ?> Result In (<?php echo $execution_time ?> Seconds)</p>
         <?php
         $query = "SELECT * FROM registration WHERE username LIKE '%$keyword%' OR user_email LIKE '%$keyword%' LIMIT 2";
         $res = $conn->query($query);
@@ -59,25 +61,26 @@ if(isset($_GET['q'])){
 
         while($row = mysqli_fetch_assoc($res)){  ?>
         <div class="friend-box">
-            <img src="img/avatar7.png" alt="">
+            <img src="userimages/<?php echo $row['user_img'];  ?>" alt="">
             <div class="tags">
                 <a href="#"><?php echo $row['username'];  ?></a>
-                <p>lihgt hyvtf hbvt hb vv</p>
-                <p>jiuhygtfrd jhgf ijuhyg jiuhyg </p>
+                <p><?php echo $row['user_gender'] ?></p>
+                <p><?php echo $row['user_email'] ?></p>
             </div>
         </div>
         <div class="seprator"></div>
         <?php }} ?>
     </div>
-            <div class="more">
-                <button id="view-more-user" class="friend-more">View More <i class="fa fa-angle-down"aria-hidden="true"></i></button>
-            </div>
+    <div class="more">
+        <button id="view-more-user" class="friend-more">View More <i class="fa fa-angle-down"aria-hidden="true"></i></button>
+    </div>
 
     <input type="hidden" id="keyword" value="<?php echo $keyword; ?>">
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"
         integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-    <script data-cfasync="false" type="text/javascript" src="js/home.js"></script>
+    <script data-cfasync="false" type="text/javascript" src="js/common.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </body>
+
 </html>

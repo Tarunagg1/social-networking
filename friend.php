@@ -40,7 +40,6 @@ include("include/functions.php");
     <div class="container" id="container">
         <?php include('include/friend-leftsidebar.php') ?>
     </div>
-
     <div class="middle-friend-container">
         <input type="hidden" value="<?php echo $get_id;?>"" id="friend_id">
         <div class="profile-container">
@@ -87,7 +86,7 @@ include("include/functions.php");
                         </div>
                         <div class="second">
                             <div class="buttons">
-                            <?php 
+                                <?php 
                             $check_reqcomedata = mysqli_query($conn,"SELECT * FROM friend_request WHERE from_id='$get_id' AND to_id='$user_id' AND status='unaprove'");
                             $ddd = mysqli_fetch_array($check_reqcomedata);
                             $check_friendtable = mysqli_query($conn,"SELECT * FROM friend_table WHERE user_from='$get_id' AND user_to='$user_id' AND status='friend' OR user_from='$user_id' AND user_to='$get_id' AND status='friend'");
@@ -97,7 +96,7 @@ include("include/functions.php");
                                 echo '<button onClick="cancelreq('.($get_id+100).')" class="cancelreq" id="delete'.($get_id+100).'">UnFollow</button>';
                             } 
                             elseif(checkrequest($user_id,($get_id)) == true){ echo '<button onClick="cancelreq('.($get_id+100).')" class="cancelreq" id="delete'.($get_id+100).'">Cancel Req</button>'; }
-                            else { echo '<button onClick="sendrequest('.($get_id+100).')" id="requestbtn'.($get_id+100).'">Send Request</button>';} ?> 
+                            else { echo '<button onClick="sendrequest('.($get_id+100).')" id="requestbtn'.($get_id+100).'">Send Request</button>';} ?>
                                 <button><i class="fa fa-message" aria-hidden="true"></i>Send Message</button>
                                 <button><i class="fa fa-search" aria-hidden="true"></i> Search</button>
                             </div>
@@ -137,20 +136,15 @@ include("include/functions.php");
                     <div class="box">
                         <h2>Friends</h2>
                         <div class="row">
-                            <img src="img/tarun.jpg" alt="Not Found">
-                            <img src="img/tarun.jpg" alt="Not Found">
-                            <img src="img/tarun.jpg" alt="Not Found">
+                            <a href="#"><img src="img/tarun.jpg" alt="Not Found"></a>
+                            <a href="#"><img src="img/tarun.jpg" alt="Not Found"></a>
+                            <a href="#"><img src="img/tarun.jpg" alt="Not Found"></a>
+                            <a href="#"><img src="img/tarun.jpg" alt="Not Found"></a>
+                            <a href="#"><img src="img/tarun.jpg" alt="Not Found"></a>
+                            <a href="#"><img src="img/tarun.jpg" alt="Not Found"></a>
+                            <a href="#"><img src="img/tarun.jpg" alt="Not Found"></a>
                         </div>
-                        <div class="row">
-                            <img src="img/tarun.jpg" alt="Not Found">
-                            <img src="img/tarun.jpg" alt="Not Found">
-                            <img src="img/tarun.jpg" alt="Not Found">
-                        </div>
-                        <div class="row">
-                            <img src="img/tarun.jpg" alt="Not Found">
-                            <img src="img/tarun.jpg" alt="Not Found">
-                            <img src="img/tarun.jpg" alt="Not Found">
-                        </div>
+                        <button>Viwe More</button>
                     </div>
                 </div>
                 <div class="right">
@@ -176,8 +170,8 @@ include("include/functions.php");
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"
         integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script data-cfasync="false" type="text/javascript" src="js/common.js"></script>
     <script data-cfasync="false" type="text/javascript" src="js/friend.js"></script>
-    <script data-cfasync="false" type="text/javascript" src="js/profile.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </body>
 

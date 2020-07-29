@@ -1,9 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Lato:400,700');
 *{
     margin: 0;
     padding: 0;
 }
-
+body{
+    box-sizing: border-box;
+    background: hsl(210, 4%, 10%);
+}
 header{
     display: flex;
     background-color: #242526;
@@ -132,7 +136,7 @@ header{
 }
   /* Track */
   ::-webkit-scrollbar-track {
-    background: hsl(210, 4%, 10%);
+    background: #242526;
   }
 
   /* Handle */
@@ -142,7 +146,7 @@ header{
 
   /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
-    background: hsla(224, 3%, 25%, 1);
+    background: blue;
   }
 
 .container{
@@ -260,13 +264,27 @@ header{
     border-radius: 50%;
     margin: 10px;
 }
+.container .right .rigtt-con .users h5{
+    background: greenyellow;
+    width: 22px;
+    box-sizing: border-box;
+    color: black;
+    margin-top: 22px;
+    height: 21px;
+    right: 68px;
+    position: fixed;
+    padding-left: 3px;
+    border-radius: 50%;
+}
 .container .right .rigtt-con .users span{
     font-size: 13px;
-    margin: 21px 0px 0px 20%;
+    margin: 21px 0px 0px 17%;
+    position: fixed;
+
 }
 .container .right .rigtt-con .users p{
   
-    margin: 19px 0px 0px -7px;
+    margin: 19px 0px 0px 0px;
     font-size: 16px;
     color: #e4e6eb;
 }
@@ -303,9 +321,11 @@ header{
 /* stories */
 
 .middle .mainbox .stories-container .stories img{
-    height: 158px;
-    width: 123px;
-    margin-left: -7px;
+    height: 155px;
+    width: 102%;
+    cursor: pointer;
+    opacity: 0.9;
+    margin-left: -4px;
 }
 .middle .mainbox .stories-container .stories .story-inner-img{
     display: flex;
@@ -313,7 +333,7 @@ header{
 }
 .middle .mainbox .stories-container .stories .story-inner-img p{
     display: inline-block;
-    margin: -46px 0px 0px 24px;
+    margin: 0px 0px 0px -5px;
 }
 .middle .mainbox .stories-container .stories-arrow {
     display: inline-block;
@@ -455,6 +475,11 @@ hr {
     background: #242526;
     margin: 12px 4px 9px 11px;
 }
+.middle .mainbox .posts  .post-actions .p-btn i{
+    color: white;
+    font-size: 17px;
+    padding: 1px;
+}
 .middle .mainbox .posts  .post-actions .p-btn:hover{
     background: #303031;
 }
@@ -472,6 +497,7 @@ hr {
         margin: 17px 0px 13px 5px;
         width: 77%;
         outline: none;
+        color: white;
         border: 1px solid #3a3b3c;
         background: #3a3b3c;
         border-radius: 69px;
@@ -669,10 +695,12 @@ hr {
     margin: 0px;
     color: white;
     border: 1px solid #242526;
+    border: 1px solid #3e4042;
     font-size: 17px;
     padding-top: 10px;
     background: none;
     width: 104%;
+    padding-left: 7px;
     height: 183px;
 }
 
@@ -697,3 +725,319 @@ hr {
     color: white;
     height: 25px;
 }
+
+
+.notification-list{
+    display: none;
+    background-color: #242526;
+    height: 88%;
+    z-index: 12;
+    right: 10px;
+    top: 67px;
+    overflow: hidden;
+    position: fixed;
+    overflow-y: scroll;
+    width: 24%;
+    border-radius: 5px;
+    color: white;
+}
+.option{
+    display: none;
+    background-color: #242526;
+    height:  auto;
+    z-index: 12;
+    top: 67px;
+    right: 10px;
+    position: fixed;
+    width: 24%;
+    border-radius: 5px;
+    color: white;
+}
+.notification-list .nofification{
+    display: flex;
+    cursor: pointer;
+    height: 80px;
+    margin-bottom: 12px;
+}
+.notification-list .nofification:hover{
+    background: #3a3b3c;
+    border-radius: 10px;
+}
+.notification-list a{
+    text-decoration: none;
+}
+.notification-list .nofification .msg{
+    color: #e4e6eb;
+    margin-top: 10px;
+}
+.notification-list .nofification .msg span{
+    font-size: 17px;
+    margin: 4px;
+    color: lightgray;
+}
+.notification-list .time{
+    font-size: 11px;
+    font-weight: 600;
+    text-align: left;
+    margin: -38px 0px 0px 82px;
+    color: #2b6ec5;
+}
+.notification-list h1{
+    margin: 20px 10px 10px 11px;
+    font-family: sans-serif;
+}
+.notification-list .nofification img{
+    height: 60px;
+    border-radius: 50%;
+    width: 62px;
+    margin: 3px 10px;
+    border: 1px solid black;
+}
+.notification-list .nofification a{
+    color: white;
+    align-items: center;
+    text-decoration: none;
+}
+/* /////////////////////////////////////////////////////////////////////////// option */
+.option a{
+    text-decoration: none;
+    display: flex;
+    color: white;
+}
+.option .useroption{
+    cursor: pointer;
+    border-radius: 9px;
+    margin: 23px 11px 8px 9px;
+    height: 80px;
+}
+.option .useroption:hover{
+    background-color: #3a3b3c;
+    transition: 0.5s ease-out;
+}
+.option .useroption img{
+    width: 57px;
+    border-radius: 50%;
+    margin: 8px 6px;
+    height: 50px;
+}
+
+.option .useroption h1{
+    margin: 12px 10px;
+    font-size: 17px;
+}
+.option .useroption span{
+    position: absolute;
+    left: 88px;
+    color: rgb(144, 146, 150);
+    font-size: 14px;
+    top: 60px;
+}
+.option .option-menu{
+    padding: 3px;
+    margin: 12px 10px;
+    height: 43px;
+    border-radius: 10px;
+}
+.option .option-menu:hover{
+    background-color: #3a3b3c;
+    transition: 0.5s ease-out;
+}
+.option .option-menu .m{
+    display: flex;
+    padding: 6px;
+}
+.option .option-menu h5{
+    margin-left: 18px;
+    font-size: 13px;
+    margin-top: 5px;
+}
+.option .option-menu i{
+    font-size: 33px;
+    margin-left: 8px;
+}
+/* //////////////////////////////////////////////////////// chat container */
+
+.chatconatiner{
+    position: fixed;
+    display: none;
+    position: fixed;
+    color: white;
+    background: #242526;
+    width: 22%;
+    z-index: 19;
+    bottom: 0px;
+    box-sizing: border-box;
+    overflow: hidden;
+    right: 52px;
+    height: 450px;
+}
+.chatconatiner .chatmain .chatheader{
+    background: #242526;
+    display: flex;
+    cursor: move;
+    padding: 8px;
+    border-bottom: 1px solid lightblue;
+    margin: 5px;
+    align-items: center;
+}
+.chatconatiner .chatmain .chatheader img{
+    height: 32px;
+    cursor: pointer;
+    width: 32px;
+    border-radius: 50%;
+}
+.chatconatiner .chatmain .chatheader p{
+    margin-left: 19px;
+    font-size: 1em;
+    cursor: pointer;
+    font-weight: 700;
+}
+.chatconatiner .chatmain .chatheader .activenow{
+    margin-left: 10px;
+    color: rgb(144, 146, 150);
+    font-size: 12px;
+    position: absolute;
+    top: 38px;
+    left: 50px;
+    cursor: pointer;
+    font-weight: 200;
+}
+.chatconatiner .chatmain .chatheader .typing{
+    margin-left: 10px;
+    color: khaki;
+    font-size: 12px;
+    cursor: pointer;
+    font-weight: 200;
+}
+.chatconatiner .chatmain .chatheader i{
+    float: right;
+    cursor: pointer;
+    color: violet;
+    position: absolute;
+    font-size: 25px;
+    right: 15px;
+}
+.chatconatiner .chatmain .chat-msg-con{
+    background: #242526;
+    min-width: 100%;
+    height: 340px;
+    overflow-y: scroll;
+} 
+.chatconatiner .chatmain .chat-msg-con .youfriend{
+    margin: 20px 0px 22px 69px;
+}
+.chatconatiner .chatmain .chat-msg-con .youfriend #nowfriend{
+    height: 83px;
+    border-radius: 50%;
+    margin-left: 20px;
+    width: 40%;
+}
+.chatconatiner .chatmain .chat-msg-con .youfriend p{
+    font-weight: 600;
+    font-size: 1em;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 9px 8px;
+}
+
+.chatconatiner .chatmain .chat-footer{
+    background: #242526;
+    margin-top: 10px;
+    height: 50px;
+}
+.chatconatiner .chatmain .chat-footer .galery{
+    font-size: 20px;
+    cursor: pointer;
+    margin: 4px 0px 0px 10px;
+    color: blueviolet;
+}
+.chatconatiner .chatmain .chat-footer input{
+    height: 28px;
+    width: 185px;
+    margin-left: 20px;
+    padding-left: 12px;
+    color: white;
+    background: #3a3b3c;
+    outline: none;
+    border: 1px solid #3a3b3c;
+    border-radius: 10px;
+}
+.chatconatiner .chatmain .chat-footer button{
+    width: 15%;
+    height: 30px;
+    float: right;
+    color: white;
+    font-weight: 700;
+    margin-right: 15px;
+    cursor: pointer ;
+    font-family: sans-serif;
+    background: #3a3b3c;
+    outline: none;
+    border: 1px solid #3a3b3c;
+}
+/* ////////////////////////////////////////////////////////// chat */
+  .message-box .picture{
+    float:left;
+    margin-top: 10px;
+    width:50px;
+    display:block;
+    padding-right:10px;
+  }
+  .picture img{
+    width:43px;
+    height:48px;
+    border-radius:5px;
+  }
+  .picture span{
+    font-weight:bold;
+    font-size:12px;
+    clear:both;
+    display:block;
+    text-align:center;
+    margin-top:3px;
+  }
+  .message-box .message{
+    background:#fff;
+    display:inline-block;
+    padding:13px;
+    margin-bottom: 20px;
+    width: 218px;
+    border-radius:2px;
+    box-shadow: 0 1px 1px rgba(0,0,0,.04);
+    position:relative;
+  }
+  .message-box .message:before{
+    content:"";
+    position:absolute;
+    display:block;
+    left:0;
+    border-right:6px solid #fff;
+    border-top: 6px solid transparent;
+    border-bottom:6px solid transparent;
+    top:10px;
+    margin-left:-6px;
+  }
+  .message-box .message span{
+    color:#555;
+    font-weight:bold;
+  }
+  .message p{
+    padding-top:5px;
+    color: black;
+  }
+  .message-box.right-img .picture{
+    float:right;
+    padding:0;
+    padding-left:10px;
+  }
+  .message-box.right-img .picture img{
+    float:right;
+  }
+  .message-box.right-img .message:before{
+    left:100%;
+    margin-right:6px;
+    margin-left:0;
+    border-right:6px solid transparent;
+    border-left:6px solid #fff;
+    border-top: 6px solid transparent;
+    border-bottom:6px solid transparent;
+  }

@@ -35,6 +35,30 @@ function get_time_ago( $time )
         }
     }
 }
+function get_time_agosort( $time )
+{
+    $time_difference = time() - $time;
+
+    if( $time_difference < 1 ) { return 'less than 1 second ago'; }
+    $condition = array( 12 * 30 * 24 * 60 * 60 =>  'y',
+                30 * 24 * 60 * 60       =>  'm',
+                24 * 60 * 60            =>  'd',
+                60 * 60                 =>  'h',
+                60                      =>  'm',
+                1                       =>  's'
+    );
+
+    foreach( $condition as $secs => $str )
+    {
+        $d = $time_difference / $secs;
+
+        if( $d >= 1 )
+        {
+            $t = round( $d );
+            return $t . ' ' . $str . ( $t > 1 ? '' : '' );
+        }
+    }
+}
 
 function getuserip(){
     switch(true){

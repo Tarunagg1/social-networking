@@ -342,3 +342,118 @@ function userlike($id){
         return false;
 }}
 ?>
+
+<?php
+////////////////////////////////////////////////////////////////////    profile firend load
+if(isset($_POST['loadfirend'])){
+    $user_data = getuser_info($_SESSION['friendbook']);
+    $user_id = $user_data['user_id'];
+    $res = mysqli_query($conn,"SELECT * FROM friend_request WHERE from_id='$user_id' OR to_id='$user_id' AND `status`='aprove'");
+    if(mysqli_num_rows($res) >0){ 
+    while($row = mysqli_fetch_array($res)){
+        $finalid = $row['from_id'];
+        if($finalid == $user_id){
+            $finalid = $row['to_id'];
+        }
+        $u = mysqli_query($conn,"SELECT * FROM registration WHERE user_id='$finalid'");
+        $udata = mysqli_fetch_array($u);
+        echo '<div class="friend-all-body">
+        <div class="friendmaininner">
+        <img id="coverpic" src="userimages/'.$udata['user_img'].'" alt="Not Found">
+        <a href="friend.php?id='.($udata['user_id']+100).'">
+            <p>'.$udata['username'].'</p>
+        </a>
+        <span>2 Mutual Friend</span>
+        <a href="friend.php?id='.($udata['user_id']+100).'"> <button>Profile</button></a>
+        </div>
+    </div>';
+    }
+}else{
+    echo '<h2>No Friend Yet</h2>';
+}
+}
+?>
+
+
+<?php
+///////////////////////////////////////////////////////////////////////////////////////////  profile friend photos upload
+if(isset($_POST['loadfirendphotos'])){
+    $user_data = getuser_info($_SESSION['friendbook']);
+    $user_id = $user_data['user_id'];
+    $res = mysqli_query($conn,"SELECT user_img,user_cover_img FROM registration WHERE user_id='$user_id'");
+    $res1 = mysqli_query($conn,"SELECT post_img FROM user_post WHERE user_id='$user_id' ORDER BY post_id DESC");
+    while ($row = mysqli_fetch_array($res)) {
+        if($row['user_img'] != " " || $row['user_cover_img'] != " " || $row['user_img'] != "NULL" || $row['user_cover_img'] != "NULL"){
+            echo '<img src="userimages/'.$row['user_img'].'" alt="Not Found">';
+            echo '<img src="userimages/'.$row['user_cover_img'].'" alt="Not Found">';
+        }
+    }
+    if(mysqli_num_rows($res1) != 1){
+        echo "<h1>Post Images</h1>";
+        while ($row = mysqli_fetch_array($res1)) {
+            if($row['post_img'] != "NULL"){
+                echo '<img src="userimages/'.$row['post_img'].'" alt="Not Found">';
+            }
+        }
+    }else{
+        echo "<h2>No Post Send</h2>";
+    }
+}
+?>
+
+<?php
+///////////////////////////////////////////////////////////////////////////////////////////  profile friend archive
+if(isset($_POST['loadrechive'])){
+    $user_data = getuser_info($_SESSION['friendbook']);
+    $user_id = $user_data['user_id'];
+    $res1 = mysqli_query($conn,"SELECT * FROM user_post WHERE user_id='$user_id' AND post_img != 'NULL' AND hide_timeline='0'");
+    $res2 = mysqli_query($conn,"SELECT * FROM user_post WHERE user_id='$user_id' AND post_img = 'NULL' AND hide_timeline='0'");
+    if(mysqli_num_rows($res1) != 0 ||  mysqli_num_rows($res2) != 0){
+            if(mysqli_num_rows($res1) != 0){    
+                $str = '  <h1>Archive Post Photos</h1>
+                <div class="post-photos-firend">';
+                    while ($d1 = mysqli_fetch_array($res1)) {
+                        $str .= '<div class="pppg" id="archivepost'.($d1['post_id']+100).'">
+                        <div class="archive-photolis" id="postlist'.($d1['post_id']+100).'">
+                            <div onClick="unarchive('.($d1['post_id']+100).')" class="unacrive">Unarchive</div>
+                        </div>
+                        <span onClick="unarchivelist('.($d1['post_id']+100).')" id="unarchive'.$d1['post_id'].'">...</span>
+                        <img src="userimages/'.$d1['post_img'].'" alt="Not Found">
+                    </div>';
+                    }
+               $str .= '</div>';
+               echo $str;
+            }
+            if(mysqli_num_rows($res2) != 0){
+                $str2 = '<h1>Archive Text Post</h1>';
+                while ($d2 = mysqli_fetch_array($res2)) {
+                   $str2 .= ' <div class="post-text-firend" id="archivepost'.($d2['post_id']+100).'">
+                   <span onClick="unarchivelist('.($d2['post_id']+100).')" id="unarchive">...</span>
+                   <div class="archive-photolis" id="postlist'.($d2['post_id']+100).'">
+                       <div onClick="unarchive('.($d2['post_id']+100).')" class="unacrive">UnArchive</div>
+                   </div>
+                   <p>'.$d2['post_content'].'</p>
+               </div>';
+            }
+            $str2 .= '</div>';
+            echo $str2;
+            }
+    }else{
+        echo'<h2>No activity to show</h2>';
+    }   
+}
+?>
+
+
+<?php
+//////////////////////////////////////////////////////////////////// unarchive post request
+if(isset($_POST['unarchivereq'])){
+    $pid = ($_POST['unarchivereq']-100);
+    $user_data = getuser_info($_SESSION['friendbook']);
+    $user_id = $user_data['user_id'];
+    $res1 = mysqli_query($conn,"UPDATE user_post SET hide_timeline='1' WHERE user_id='$user_id' AND post_id='$pid'");
+}
+?>
+
+
+

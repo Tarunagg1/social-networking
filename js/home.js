@@ -1,33 +1,3 @@
-$(document).ready(function () {
-    $('#serch-textbox').keyup(function () {
-        serchval = $('#serch-textbox').val()
-        if (serchval != 0) {
-            $.ajax({
-                url: "include/backend1.php",
-                method: "POST",
-                data: { serchval: serchval },
-                success: function (data) {
-                    $('#serch-list').fadeIn();
-                    $('#serch-ul').html(data);
-                }
-            });
-        } else {
-            $('#serch-list').fadeOut();
-        }
-    });
-    $(document).on('click', '.serch-item', function (e) {
-        $('#serch-textbox').val($(this).text());
-        $('#serch-list').fadeOut();
-        serchval = $('#serch-textbox').val()
-        window.location = `serch.php?q=${serchval}`
-    });
-    $('#serch-textbox').keyup(function (e) {
-        if (e.keyCode == 13) {
-            window.location = `serch.php?q=${serchval}`
-        }
-    });
-});
-
 function imagevalidate() {
     var property = document.getElementById('postimage').files[0];
     var imgename = property.name;
@@ -41,17 +11,15 @@ function imagevalidate() {
         $('#postbutton').prop('disabled', true);
     } else {
         $('#postbutton').prop('disabled', false);
-        $('#file-name').text(imgename)    
+        $('#file-name').text(imgename)
     }
 }
-$('#postimage').on("change",function(){
-    console.log("okijuhygt");
-    const file = this.files[0];     
-    console.log(file);
-                       
+$('#postimage').on("change", function () {
+    const file = this.files[0];
+
     const reader = new FileReader();
-    reader.onload = function(e){
-        $('#add-image').attr('src',e.target.result)
+    reader.onload = function (e) {
+        $('#add-image').attr('src', e.target.result)
     }
     reader.readAsDataURL(this.files[0])
 })
@@ -102,5 +70,106 @@ $(document).ready(function () {
             commentcount: commentcount, keyword: keyword
         })
     })
+})
+
+///////////////////////////////////////////// friend fetch
+// setInterval(featchfriend,2000)
+featchfriend();
+function featchfriend() {
+    $(document).ready(function () {
+        $.ajax({
+            url: "include/backend.php",
+            type: 'post',
+            data: { loadfriend: "laoddata" },
+            success: function (data) {
+                $("#right-user-con").html(`${data}`)
+            }
+        })
+    })
+}
+
+
+//////////////////////////////////////////////////////////////////////////// chat box
+$(function () {
+    $("#chatcontainer").draggable();
+});
+
+var intervelid = 0;
+
+function createchatbox(id, friend_id) {
+    $("#mainmsg").html(``)
+    $.ajax({
+        url: "include/backend1.php",
+        type: 'post',
+        data: { fetch_userdata: id },
+        success: function (data) {
+            if (data != 0) {
+                res = JSON.parse(data);
+                $("#chatcontainer").show()
+                $("#chatimage").attr("src", "userimages/" + res.img);
+                $("#nowfriend").attr("src", "userimages/" + res.img);
+                $("#chatname").text(res.name);
+                $("#msg").attr("data-id", "jhuyg")
+                $("#activestatus").text(`Active   ${res.active}`)
+                $("#sendbtn").attr("onclick", `friend(${(friend_id + 100)} , ${res.userid})`);
+                fetchchat(`${res.userid}`);
+                intervelid = setInterval(() => {
+                    fetchchat(`${res.userid}`);
+                }, 3000);
+            } else {
+                alert("something is wrong")
+            }
+        }
+    })
+}
+
+function fetchchat(id) {
+    $.ajax({
+        url: "include/backend1.php",
+        type: 'post',
+        data: { fetchchat_id: id },
+        success: function (data) {
+            if (data != 0) {
+                $("#mainmsg").html(`${data}`)
+                $(".message-box").animate({
+                    scrollTop: $("#mainmsg").height()
+                },"fast")
+            }
+        }
+    })
+}
+
+
+function friend(friend_id, user_id) {
+    msg = $("#msg").val();
+    if (msg != "") {
+        $.ajax({
+            url: "include/backend1.php",
+            type: 'post',
+            data: { chattoid: user_id, friend_id: friend_id, message: msg },
+            success: function (data) {
+                if (data == 0) {
+                    $("#msg").val('');
+                    fetchchat(user_id);
+                } else {
+                    alert("something is wrong")
+                }
+            }
+        })
+    }
+}
+
+$("#closechat").click(function () {
+    $("#chatcontainer").hide()
+    clearInterval(intervelid);
+    intervelid = 0;
+})
+
+$("#sendimg").click(function () {
+    $("#sendchatimg").click();
+})
+
+$(".sto").on('click',function(){
+    window.location.href =`stories.php`;
 })
 

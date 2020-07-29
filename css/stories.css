@@ -1,0 +1,113 @@
+body{
+    background: #4b4c4f;
+    max-height: 100%;
+    max-width: 100%;
+}
+.container .left {
+   width: 23%;
+}
+.left .storyh5{
+    font-size: 25px;
+    margin: 12px 0px 10px 21px;
+}
+.container .storycontainer {
+    background-color: #4b4c4f;
+    margin-left: 23%;
+    padding-top: 3px;
+    color: #e4e6eb;
+}
+.container .storycontainer .notstoryid{
+    margin: 20% 0% 0% 32%;
+}
+.container .storycontainer .notstoryid i{
+    font-size: 122px;
+    margin-left: 50px;
+}
+.container .storycontainer .notstoryid h5{
+    font-size: 27px;
+    font-weight: 600;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin-top: 11px;
+}
+.container .left .tab img {
+    border: 2px solid gray;
+}
+.container .left .tab span{
+    position: fixed;
+    left: 19%;
+    margin-top: 10px;
+}
+.seprator {
+    margin-bottom: 11px;
+}
+.container .storycontainer .story-imagecon{
+    width: 100%;
+    overflow: hidden;
+    height: 702px;
+    background-color: black;
+}
+.container .storycontainer .story-imagecon .storydisplay{
+    width: 99%;
+}
+.container .storycontainer .story-imagecon .storydisplay img{
+    width: 34%;
+    margin-left: 28%;
+    margin-top: 2%;
+    height: 600px;
+}
+
+.container .left .tab .fetstap{
+    margin-left: 21px;
+    margin-top: 5px;
+    font-weight: bolder;
+    font-style: initial;
+    font-size: 15px;
+}
+.container .left .tab .numsto{
+    position: relative;
+    font-style: inherit;
+    top: 21px;
+    font-size: 13px;
+    left: -111px;
+}
+.container .left .mystry .mystac{
+    position: relative;
+    font-size: 13px;
+    font-style: inherit;
+    top: 21px;
+    left: -124px;
+
+}
+.blur {
+    /* All the background image supports */
+    transform: translate(0px, 0px, 0px);
+    background-image: -webkit-linear-gradient(bottom left, rgba(43, 40, 50, 0.8) 0%, rgba(83, 86, 99, 0.8) 45%, rgba(69, 77, 91, 0.6) 60%);
+    background-image: -moz-linear-gradient(bottom left, rgba(43, 40, 50, 0.8) 0%, rgba(83, 86, 99, 0.8) 45%, rgba(69, 77, 91, 0.6) 60%);
+    background-image: -o-linear-gradient(bottom left, rgba(43, 40, 50, 0.8) 0%, rgba(83, 86, 99, 0.8) 45%, rgba(69, 77, 91, 0.6) 60%);
+    background-image: linear-gradient(to top right, rgba(43, 40, 50, 0.8) 0%, rgba(83, 86, 99, 0.8) 45%, rgba(69, 77, 91, 0.6) 60%);
+    /* blur filters */
+    height: 100%;
+    width: 100%;
+
+    -webkit-filter: blur(20px);
+    -o-filter: blur(20px);
+    filter: blur(0px);
+}
+  
+  .blur:after {
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 100%;
+
+    /* Setting the gradient. Adds depth, and glass like effect. */
+    background-image: -webkit-linear-gradient(289deg, rgba(43,40,50,0.8) 0%, rgba(43,40,50,0.4) 46%, rgba(0,0,0,0.05) 50%);
+    background-image: -moz-linear-gradient(289deg, rgba(43,40,50,0.8) 0%, rgba(43,40,50,0.4) 46%, rgba(0,0,0,0.05) 50%);
+    background-image: -o-linear-gradient(289deg, rgba(43,40,50,0.8) 0%, rgba(43,40,50,0.4) 46%, rgba(0,0,0,0.05) 50%);
+    background-image: linear-gradient(-19deg, rgba(43,40,50,0.8) 0%, rgba(43,40,50,0.4) 46%, rgba(0,0,0,0.05) 50%);
+  
+    /* Blur to add depth. High to create smooth transition */
+    -webkit-filter: blur(70px);
+    -o-filter: blur(70px);
+    filter: blur(70px);
+}

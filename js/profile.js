@@ -1,35 +1,3 @@
-////////////////serch 
-$(document).ready(function () {
-    $('#serch-textbox').keyup(function () {
-        serchval = $('#serch-textbox').val()
-        if (serchval != 0) {
-            $.ajax({
-                url: "include/backend1.php",
-                method: "POST",
-                data: { serchval: serchval },
-                success: function (data) {
-                    $('#serch-list').fadeIn();
-                    $('#serch-ul').html(data);
-                }
-            });
-        } else {
-            $('#serch-list').fadeOut();
-        }
-    });
-    $(document).on('click', '.serch-item', function (e) {
-        $('#serch-textbox').val($(this).text());
-        $('#serch-list').fadeOut();
-        serchval = $('#serch-textbox').val()
-        window.location = `serch.php?q=${serchval}`
-    });
-    $('#serch-textbox').keyup(function (e) {
-        if (e.keyCode == 13) {
-            window.location = `serch.php?q=${serchval}`
-        }
-    });
-});
-
-
 /////////////////////fetch data
 $(document).ready(function () {
     var limit = 2;
@@ -64,7 +32,7 @@ $(document).ready(function () {
         if ($(window).scrollTop() + $(window).height() > $("#load_data").height() && action == 'inactive') {
             action = 'active';
             start = start + limit;
-            setTimeout(function () {                
+            setTimeout(function () {
                 load_data(limit, start)
             }, 1000);
         }
@@ -122,6 +90,18 @@ $('#createpost').on('submit', function (e) {
 });
 
 ///////////////////////save bio
+form = document.getElementById('form-bio')
+document.getElementById('addbio').addEventListener('click', function () {
+    form.style.display = "block";
+})
+document.getElementById('save-bio').addEventListener('click', function () {
+    form.style.display = "none";
+});
+document.getElementById('cancel-bio').addEventListener('click', function () {
+    form.style.display = "none";
+});
+
+
 
 $(document).ready(function () {
     $('#save-bio').prop('disabled', true)
@@ -369,7 +349,6 @@ function editpost(id) {
 
 }
 
-
 ////////////////////// edit form submit
 $('#editpost').on('submit', function (e) {
     e.preventDefault();
@@ -396,8 +375,8 @@ $('#editpost').on('submit', function (e) {
             if (data == 0) {
                 alert("SomeThing Went To Wrong Try Again")
             } else {
-                $("#normal-text"+id).text(content)
-                $("#post_img"+id).attr("src","userimages/"+data)
+                $("#normal-text" + id).text(content)
+                $("#post_img" + id).attr("src", "userimages/" + data)
                 $('#editpostbutton').prop('disabled', false);
                 $('#editpostbutton').val('Update Post');
                 var modal = document.getElementById("editmyModal");
@@ -418,7 +397,7 @@ function addcomment(id, value) {
             data: { post_id: id, comment_text: value },
             success: function (data) {
                 res = JSON.parse(data)
-                $(".comment"+id).text(res.commentcount+" Comment");
+                $(".comment" + id).text(res.commentcount + " Comment");
                 $("#comment-text-" + id).val("")
                 commentsection(id);
             }
@@ -432,40 +411,154 @@ function commentsection(id) {
         $.ajax({
             url: "include/profile.php",
             type: 'post',
-            data: {comment_id:id},
-            success: function (data) {  
-                $("#post-comment-container"+id).html(data);
+            data: { comment_id: id },
+            success: function (data) {
+                $("#post-comment-container" + id).html(data);
             }
         })
     } else {
         console.log("enter some text");
     }
-    $("#post-comment-container"+id).fadeToggle();
+    $("#post-comment-container" + id).fadeToggle();
 }
 
 
-function likepost(id){
+function likepost(id) {
     ///////////////////////////////////////////////////// post like ddislike post
-    btn = $("#like-btn-"+id);
-    if(btn.hasClass('fa-notlike')){
+    btn = $("#like-btn-" + id);
+    if (btn.hasClass('fa-notlike')) {
         action = "like";
-    }else if(btn.hasClass('like-post')){
+    } else if (btn.hasClass('like-post')) {
         action = "unlike"
-    }    
+    }
     $.ajax({
         url: "include/profile.php",
-        type:"post",
-        data:{'like_action':action,'post_id':id},
-        success:function(data){
+        type: "post",
+        data: { 'like_action': action, 'post_id': id },
+        success: function (data) {
             res = JSON.parse(data);
-            if(action === 'like'){
+            if (action === 'like') {
                 btn.removeClass('fa-notlike');
                 btn.addClass('like-post');
-            }else if(action === 'unlike'){
+            } else if (action === 'unlike') {
                 btn.removeClass('like-post');
                 btn.addClass('fa-notlike');
             }
-             $(".likes"+id).text(res.likes+" Likes");
+            $(".likes" + id).text(res.likes + " Likes");
         }
     })
 }
+
+
+////////////////////////////////////////////////////////////////////////////////    profile division
+let whichactive = "timeline";
+
+$("#viewfriend").on('click', function () {
+    $(`#${whichactive}`).removeClass("profileactive")
+    whichactive = "viewfriend";
+    $("#viewfriend").addClass("profileactive")
+    $.ajax({
+        url: "include/profile.php",
+        method: "post",
+        data: {
+            loadfirend: "loadfriend"
+        },
+        success: function (data) {
+            $("#profile-main").html(`<div class="view-friend-list">
+    <div class="friend-all-header">
+        <h1>Friends</h1>
+        <div class="ff">
+            <a href="friend.php"> <button class="friend-ope">Friend Request</button> </a>
+            <a href="friend.php"> <button class="friend-ope">Find Friend</button> </a>
+        </div>
+    </div>
+    <div class="friend-all-body-main">
+        ${data}
+    </div>
+</div>`);
+        }
+    })
+})
+
+$("#about").on('click', function () {
+    $(`#${whichactive}`).removeClass("profileactive")
+    whichactive = "about";
+    $("#about").addClass("profileactive")
+    $("#profile-main").load('include1/about.php');
+})
+
+$("#archive").on('click', function () {
+    $(`#${whichactive}`).removeClass("profileactive")
+    whichactive = "archive";
+    $("#archive").addClass("profileactive")
+    $.ajax({
+        url: "include/profile.php",
+        method: "post",
+        data: {
+            loadrechive: "loadfriend"
+        },
+        success: function (data) {
+            $("#profile-main").html(` <div class="view-friend-list">
+            <div class="friend-all-header">
+                <h1>Archive</h1>
+                <div class="ff">
+                    <a href="friend.php"> <button class="friend-ope">Friend Request</button> </a>
+                    <a href="friend.php"> <button class="friend-ope">Find Friend</button> </a>
+                </div>
+            </div>
+            <div class="profile-forphotoarchive">
+              ${data}               
+            </div>
+            <!-- <h2>No activity to show</h2> -->
+        </div>`);
+        }
+    })
+})
+
+$("#photos").on('click', function () {
+    $(`#${whichactive}`).removeClass("profileactive")
+    whichactive = "photos";
+    $("#photos").addClass("profileactive")
+    $.ajax({
+        url: "include/profile.php",
+        method: "post",
+        data: {
+            loadfirendphotos: "loadfriend"
+        },
+        success: function (data) {
+            $("#profile-main").html(`<div class="profile-forphoto">
+            <h1>Photos For You</h1>
+            ${data}
+            </div>`);
+        }
+    })
+})
+
+//////////////////////////////////////////////////////////////////////////////// archive post unarchive
+
+function unarchivelist(id){
+    $(`#postlist${id}`).fadeToggle();
+}
+
+function unarchive(id){
+    $.ajax({
+        url: "include/profile.php",
+        method: "post",
+        data: {unarchivereq:id},
+        success: function (data) {
+            console.log(data);
+            if(data == 0){
+                $(`#archivepost${id}`).hide();
+            }
+        }
+    })
+}
+
+$("#viwephoto").on('click',function(){
+    $("#photos").click();
+})
+
+$("#viewallfrnd").on('click',function(){
+    $("#viewfriend").click();    
+})
+

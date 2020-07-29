@@ -10,6 +10,7 @@ body{
     height: 357px;
     border-radius: 12px;
     margin-left: 19%;
+    opacity: 0.9 !important;
     width: 60%;
 }
 .profile-pics .profile-pic .cover-pic .upload-button{
@@ -246,6 +247,10 @@ body{
     display: flex;
     margin-left: 8px;
 }
+.pic-buttom .pic-buttom-last-header .division .first ul a{
+    text-decoration: none;
+    color: #acafb4;
+}
 .pic-buttom .pic-buttom-last-header .division .first li{
    list-style: none;   
    font-size: 16px;
@@ -310,7 +315,26 @@ body{
 .profile-container .profile-main .left .box .row{
     margin: 2px 0px 0px 0px;
 }
-
+.profile-container .profile-main .left .box .row1{
+    margin: 10px 0px 0px 9px;
+}
+.profile-container .profile-main .left .box .row1 .rowfriend{
+    display: inline-block;
+    width: 32%;
+    margin-bottom: 11px;
+}
+.profile-container .profile-main .left .box .row1 .rowfriend img{
+    width: 97%;
+    height: 78px;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+.profile-container .profile-main .left .box .row1 .rowfriend a{
+    color: #e4e6eb;
+    text-decoration: none;
+    font-size: 14px;
+    font-family: sans-serif;
+}
 .profile-container .profile-main .left .box .row img{
     border-radius: 8px;
     padding: 6px 0px 0px 0px;
@@ -402,6 +426,7 @@ body{
 .profile-container .profile-main .right .box .row .img img{
     margin: 15px 0px 0px 0px;
     width: 98%;
+    height: 310px;
 }
 hr {
     width: 88%;
@@ -507,6 +532,7 @@ hr {
 }
 .post-comment-container .comment-message .message p{
     padding: 2px 0px 2px 4px;
+    color: white;
 }
 .post-comment-container .comment-message .comment-footer ul{
     display: flex;
@@ -576,4 +602,319 @@ hr {
 }
 .readless{
     cursor: pointer;
+}
+
+
+
+/* ////////////////////////////////////////////////////////////////////////// profile list options */
+.profileactive{
+    color: blueviolet;
+}
+.profile-main .view-friend-list{
+    overflow: hidden;
+    background-color: #242526;
+    width: 100%;
+    max-width: 100%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: white;
+    box-shadow: 1px 2px #242526;
+}
+.profile-main .view-friend-list .friend-all-header{
+    display: flex;
+    margin: 20px 0px 21px 26px;
+}
+.profile-main .view-friend-list .friend-all-header .ff{
+    margin-left: 44%;
+}
+.profile-main .view-friend-list .friend-all-header .ff .friend-ope{
+    background-color: #242526;
+    border: 1px solid #242526;
+    font-size: 14px;
+    font-weight: 200;
+    cursor: pointer;
+    outline: none;
+    padding: 4px 12px 2px 8px;
+    height: 42px;
+    margin-left: 27px;
+    color: steelblue;
+}
+.profile-main .view-friend-list .friend-all-header .ff .friend-ope:hover{
+    background: #4e4f50;
+    border: 1px solid #4e4f50;
+    border-radius: 5px;
+}
+.profile-main .view-friend-list .friend-all-body{
+    width: 42%;
+    display: inline-block;
+    margin: 15px 0px 36px 30px;
+}
+.view-friend-list .profile-forphotoarchive h2{
+    font-size: 24px;
+    color: rgb(138, 141, 145);   
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 20px;
+}
+.profile-main .view-friend-list .friend-all-body .friendmaininner{
+    display: flex;
+}
+.profile-main .view-friend-list .friend-all-body  a{
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    width: 139px;
+    font-size: 14px;
+    margin: 13px 0px 12px 10px;
+}
+.profile-main .view-friend-list .friend-all-body img{
+    width: 140px;
+    height: 113px;
+    border-radius: 5px; 
+}
+
+.profile-main .view-friend-list .friend-all-body span{
+    position: absolute;
+    font-size: 10px;
+    margin-left: 129px;
+    margin-top: 36px;
+}
+.profile-main .view-friend-list .friend-all-body button{
+    background-color: #303031;
+    border: 1px solid #3a3b3c;
+    font-size: 14px;
+    font-weight: bold;
+    outline: none;
+    cursor: pointer;
+    padding: 4px 12px 2px 8px;
+    height: 42px;
+    border-radius: 5px;
+    color: lightskyblue;
+    margin: 29px;
+}
+.profile-main .view-friend-list .friend-all-body button:hover{
+    background: #4e4f50;
+    border: 1px solid #4e4f50;
+    border-radius: 5px;   
+}
+
+/* //////////////////////////////////////////////////////////////////////// profile photos */
+.profile-main .profile-forphoto{
+    width: 100%;
+    background-color: #242526;
+    margin: 21px;
+}
+.profile-main .profile-forphotoarchive .post-text-firend{
+    display: inline-flex;
+    width: 29%;
+    margin: 14px 4px;
+    padding: 9px;
+    height: 216px;
+    overflow-y: scroll;
+    border: 1px solid white;
+}
+.profile-main  .profile-forphotoarchive .post-text-firend  span{
+    position: relative;
+    font-size: 27px;
+    cursor: pointer;
+    top: -20px;
+    cursor: pointer;
+    left: 84%;
+}
+.profile-main  .profile-forphotoarchive .post-text-firend  p{
+    margin-top: 18px;
+}
+.profile-main  .profile-forphotoarchive .post-text-firend .archive-photolis {
+    position: absolute;
+    background: black;
+    display: none;
+    height: 37px;
+    width: 15%;
+    margin-top: 17px;
+    margin-left: 13%;
+    border-radius: 6px;
+}
+ .unacrive{
+    cursor: pointer;
+    margin: 4px 11px 0px 10px;
+    padding: 3px 0px 5px 20px;
+}
+.unacrive:hover{
+    background-color: #3a3b3c;
+    transition: 0.4s ease-out;
+}
+.profile-main .profile-forphoto h1{
+    margin: 8px 30px 0px;
+}
+.profile-main .profile-forphoto img{
+    width: 29%;
+    height: 197px;
+    margin: 28px 8px 0px 21px;
+}
+.profile-main .view-friend-list .profile-forphotoarchive{
+    margin-left: 22px;
+}
+.profile-main .view-friend-list .profile-forphotoarchive .post-photos-firend .pppg{
+    display: inline-block;
+    width: 291px;
+}
+.profile-main .view-friend-list .profile-forphotoarchive .post-photos-firend .pppg .archive-photolis {
+    position: absolute;
+    background: black;
+    height: 37px;
+    width: 15%;
+    display: none;
+    margin-top: 44px;
+    margin-left: 15%;
+    border-radius: 6px;
+}
+.profile-main .view-friend-list .profile-forphotoarchive .post-photos-firend .pppg span{
+    font-size: 32px;
+    float: right;
+    cursor: pointer;
+    margin-right: 24px;
+}
+.profile-main .view-friend-list .profile-forphotoarchive .post-photos-firend .pppg img{
+    width: 258px;
+    margin: 9px 13px;
+    height: 218px;
+}
+
+/* ///////////////////////////////////////////////////////////////////////// about profile css */
+.profile-main{
+    margin-bottom: 17px;
+}
+.profile-main .view-friend-list .aboutmain{
+    display: flex;
+    margin-bottom: 17px;
+}
+.profile-main .view-friend-list .aboutmain .aboutleft{
+    width: 30%;
+    box-sizing: border-box;
+    margin-top: 13px;
+}
+.profile-main .view-friend-list .aboutmain .abouth1{
+    position: absolute;
+    margin: 15px;
+    font-size: 21px;
+}
+.profile-main .view-friend-list .aboutmain .aboutleft ul{
+    margin-top: 45px;
+    margin-left: 6px;
+}
+.profile-main .view-friend-list .aboutmain .aboutleft li.abourtactive{
+    background: #3a3b3c;
+    -webkit-user-select:none;
+    color: hsl(214deg 100% 60%);
+}
+.profile-main .view-friend-list .aboutmain .aboutleft ul li{
+    list-style: none;
+    cursor: pointer;
+    border-radius: 6px;
+    padding: 0px 10px 0px 3px;
+    width: 92%;
+    font-weight: 400;
+    margin-top: 6px;
+}
+
+.profile-main .view-friend-list .aboutmain .aboutleft ul li .aboutlistitem {
+    border-radius: 6px;
+    padding: 6px 10px 7px 8px;
+    width: 97%;
+    font-weight: 400;
+}
+.profile-main .view-friend-list .aboutmain .aboutleft ul li .aboutlistitem:hover{
+    background: #3a3b3c;
+}
+.vl {
+    border-left: 2px solid rgb(62 64 66);
+    left: 50%;
+    margin-left: -3px;
+    top: 0;
+}
+.profile-main .view-friend-list .aboutmain .aboutright{
+    margin: 17px 18px 10px 7px;
+    width: 70%;
+    box-sizing: border-box;
+    margin-top: 13px;
+}
+.profile-main .view-friend-list .aboutmain .aboutright  h3{
+    margin-left: 27px;
+    margin-top: 11px;
+}
+.profile-main .view-friend-list .aboutmain .aboutright .aboutrightitem{
+    display: flex;
+    height: 31px;
+    margin: 17px;
+    padding: 2px;
+    margin-top: 23px;
+}
+.profile-main .view-friend-list .aboutmain .aboutright .aboutrightitem i{
+    font-size: 26px;
+    color: rgb(114 123 135);
+    margin: 2px 25px 0px 8px;
+}
+.profile-main .view-friend-list .aboutmain .aboutright .aboutrightitem .itemtitle{
+    color: rgb(197 230 223);
+    font-weight: 400;
+    width: 86%;
+}
+.profile-main .view-friend-list .aboutitemment{
+    background: #3a3b3c;
+    cursor: pointer;
+    width: 39px;
+    height: 36px;
+    border-radius: 50%;
+}
+.profile-main .view-friend-list .aboutitemment:hover{
+        background-color: #2c3035;
+}
+.profile-main .view-friend-list .aboutitemment p{
+    font-size: 26px;
+    font-weight: 600;
+    margin-top: -8px;
+    margin-left: 10px;
+}
+
+.profile-main .view-friend-list .aboutmain .aboutright .sectionofadding{
+    margin: 16px 1px 1px 19px;
+} 
+.profile-main .view-friend-list .aboutmain .aboutright .sectionofadding .workadd{
+    display: flex;  
+}
+.profile-main .view-friend-list .aboutmain .aboutright .sectionofadding .workadd i{
+    margin: 2px 16px 0px 7px;
+    font-size: 19px;
+    color: #2865b9;
+}
+.profile-main .view-friend-list .aboutmain .aboutright .sectionofadding .workadd p{
+    color: #2865b9;
+    cursor: pointer;
+}
+.profile-main .view-friend-list .aboutmain .aboutright .sectionofadding .sectionofaddingitem{
+    margin-top: 25px;
+}
+.profile-main .view-friend-list .aboutmain .aboutright .sectionofadding .sectionofaddingitem .sectionitem{
+    display: flex;
+}
+.profile-main .view-friend-list .aboutmain .aboutright .sectionofadding .sectionofaddingitem .sectionitem img{
+    width: 55px;
+    height: 50px;
+    border-radius: 50%;
+}
+.profile-main .view-friend-list .aboutmain .aboutright .sectionofadding .sectionofaddingitem .sectionitem .sectionitemp{
+    width: 80%;
+    color: rgb(197 230 223);
+    font-weight: 400;
+    margin-left: 14px;
+    margin-top: 3px;
+}
+.profile-main .view-friend-list .aboutmain .aboutright .sectionofadding .sectionofaddingitem span{
+    position: absolute;
+    font-size: 11px;
+    left: 646px;
+    margin-top: -21px;
+}
+.profile-main .view-friend-list .aboutmain .aboutright .sectionofadding h5{
+    margin: 38px 0px 10px 12px;
 }

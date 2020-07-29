@@ -16,7 +16,6 @@ define("title", "profile");
 
 <body>
     <?php include("include/home-header.php"); ?>
-    <?php include("include/createpost.php"); ?>
     <?php include("include/editpost.php"); ?>
     <div class="profile-container">
         <div class="profile-pics">
@@ -79,20 +78,22 @@ define("title", "profile");
                 <div class="division">
                     <div class="first">
                         <ul>
-                            <div class="list">
-                                <li>TimeLine</li>
+                            <a href="profile.php">
+                                <div id="timeline" class="list profileactive">
+                                    <li>TimeLine</li>
+                                </div>
+                            </a>
+                            <div id="about" class="list">
+                                <li>About</li>
                             </div>
-                            <div class="list">
+                            <div id="viewfriend" class="list">
                                 <li>Friends</li>
                             </div>
-                            <div class="list">
-                                <li>Friends</li>
+                            <div id="photos" class="list">
+                                <li>Photos</li>
                             </div>
-                            <div class="list">
-                                <li>Friends</li>
-                            </div>
-                            <div class="list">
-                                <li>Friends</li>
+                            <div id="archive" class="list">
+                                <li>Archive</li>
                             </div>
                         </ul>
                     </div>
@@ -106,90 +107,17 @@ define("title", "profile");
                 </div>
             </div>
         </div>
-        <div class="profile-main">
-            <div class="left">
-                <div class="box">
-                    <h2>Intro</h2>
-                    <p>Student at StudyInIndia.org</p>
-                    <p>Studies at PDM College of Engineering</p>
-                    <p>Studies Because good at PDM University</p>
-                    <p>Studies at University of Delhi</p>
-                    <p>Went to R R Gita Bal Bharti Public School-Alternate Gate</p>
-                    <p>From New Delhi, India</p>
-                    <p>Joined on June 2017</p>
-                    <button>Edit Details</button>
-                </div>
-                <div class="box">
-                    <h2>Photos</h2>
-                    <div class="row">
-                    <?php 
-                        $user_photo = mysqli_query($conn,"SELECT post_img FROM user_post WHERE user_id='$user_id' AND post_img!='NULL' ORDER BY post_id LIMIT 9");
-                        if(mysqli_num_rows($user_photo) > 0)
-                        while ($row = mysqli_fetch_array($user_photo)){
-                            $img = $row['post_img'];
-                            echo '<img src="userimages/'.$img.'" alt="Not Found">';
-                        }else{
-                            echo "<h2>No Image Found</h2>";
-                        }
-                    ?>
-                    </div>
-                    <button>Viwe More</button>
-                </div>
-                <div class="box">
-                    <h2>Friends</h2>
-                    <div class="row">
-                        <img src="img/tarun.jpg" alt="Not Found">
-                        <img src="img/tarun.jpg" alt="Not Found">
-                        <img src="img/tarun.jpg" alt="Not Found">
-                    </div>
-                    <div class="row">
-                        <img src="img/tarun.jpg" alt="Not Found">
-                        <img src="img/tarun.jpg" alt="Not Found">
-                        <img src="img/tarun.jpg" alt="Not Found">
-                    </div>
-                    <div class="row">
-                        <img src="img/tarun.jpg" alt="Not Found">
-                        <img src="img/tarun.jpg" alt="Not Found">
-                        <img src="img/tarun.jpg" alt="Not Found">
-                    </div>
-                </div>
-            </div>
-            <div class="right">
-                <div class="box ">
-                    <div class="row">
-                        <div class="send-post">
-                            <img id="send-post-img" src="userimages/<?php echo $user_img; ?>" alt="">
-                            <input type="text" id="myBtn" placeholder="What's on your mind, Tarun?">
-                        </div>
-                    </div>
-                </div>
-                <div class="box">
-                    <div class="box" id="load_data"></div>
-                    <div class="" id="load_data_msg"></div>
-                </div>
-            </div>
+        <div id="profile-main" class="profile-main">
+            <?php include('include1/timeline.php'); ?>
         </div>
+    </div>
     </div>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"
         integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-    <script data-cfasync="false" type="text/javascript" src="js/main.js"></script>
     <script data-cfasync="false" type="text/javascript" src="js/profile.js"></script>
+    <script data-cfasync="false" type="text/javascript" src="js/common.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </body>
-
-<script>
-    ////////////// user bio
-form = document.getElementById('form-bio')
-document.getElementById('addbio').addEventListener('click', function() {
-    form.style.display = "block";
-})
-document.getElementById('save-bio').addEventListener('click', function() {
-    form.style.display = "none";
-});
-document.getElementById('cancel-bio').addEventListener('click', function() {
-  form.style.display = "none";
-});
-</script>
 
 </html>
