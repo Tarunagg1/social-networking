@@ -99,7 +99,7 @@ define("title", "profile");
                     </div>
                     <div class="second">
                         <div class="buttons">
-                            <button><i class="fa fa-pencil" aria-hidden="true"></i> Edit</button>
+                            <button id="aboutbtn"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</button>
                             <button><i class="fa fa-eye" aria-hidden="true"></i> Viwe As</button>
                             <button><i class="fa fa-search" aria-hidden="true"></i> Serch</button>
                         </div>

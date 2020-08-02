@@ -84,7 +84,7 @@ include ('dbconf.php');
    <img src="userimages/'.$user_img.'" alt="comment-img">
    <input type="text" id="comment-text-'.$id.'" placeholder="Write a comment">
     </div>
-    '; if($comment_count > 0) { echo '
+    '; if($comment_count >=0) { echo '
    <div class="post-comment-container" id="post-comment-container'.$id.'">
    <div id="row"></div>
   '; 

@@ -86,10 +86,11 @@ $('#addstories').on('submit', function (e) {
                     $('#storybtn').prop('disabled', false);
                     $('#storybtn').val('Add Stories');
                     $("#add-story").attr("src", "")
-                    modal.style.display = "none";
+                    stomodal.style.display = "none";
                     $("#mystry").html(` <div class="tab" id="tab">
                     <img src="userimages/${myimg}" alt="User img">
                     <p>View your Stories</p><span>1S</span>
+                    <i class="mystac">1 Stories</i>
                 </div>`);
                 }
             },
@@ -101,7 +102,7 @@ $('#addstories').on('submit', function (e) {
 });
 
 
-$(".tab").on('click',function(){
+$(".stclick").on('click',function(){
     id = $(this).attr("data-id");
     console.log(id);
     $("#storycontainer").html(` <div class="story-imagecon">

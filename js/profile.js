@@ -487,6 +487,10 @@ $("#about").on('click', function () {
     $("#profile-main").load('include1/about.php');
 })
 
+$("#aboutbtn").click(function(){
+    $("#about").click();
+})
+    
 $("#archive").on('click', function () {
     $(`#${whichactive}`).removeClass("profileactive")
     whichactive = "archive";

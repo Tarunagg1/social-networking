@@ -62,13 +62,13 @@ define("title", "home");
                             }
                          }
                         if($count == 1){
-                              echo '<div class="stories"></div>';  
+                              echo '<div class="stories"></div><div class="stories"></div><div class="stories"></div>';  
                          }
                         else if($count == 2){
                             echo '<div class="stories"></div><div class="stories"></div>';
 
                          }else if($count == 3){
-                            echo '<div class="stories"></div><div class="stories"></div>';
+                            echo '<div class="stories"></div>';
                          }
                         ?>
                 </div>
