@@ -48,19 +48,19 @@ function sendrequest(to_id){
         method:"post",
         data:{to_id:to_id},
         beforeSend: function () {
-            $("#requestbtn"+to_id).prop('disabled', true);
-            $("#requestbtn"+to_id).text('Requesting....');
+            $(".requestbtn"+to_id).prop('disabled', true);
+            $(".requestbtn"+to_id).text('Requesting....');
         },
         success:function(data){
             if(data == 0){
-                $("#requestbtn"+to_id).addClass("cancelreq");
-                $("#requestbtn"+to_id).prop('disabled', false);
-                $("#requestbtn"+to_id).text('Cancel Req');
-                $("#requestbtn"+to_id).attr("onclick",`cancelreq(${to_id})`);
-                document.getElementById("requestbtn"+to_id).id = "delete"+to_id;
+                $(".requestbtn"+to_id).addClass("cancelreq");
+                $(".requestbtn"+to_id).prop('disabled', false);
+                $(".requestbtn"+to_id).text('Cancel Req');
+                $(".requestbtn"+to_id).attr("onclick",`cancelreq(${to_id})`);
+                $(".requestbtn"+to_id).addClass("delete"+to_id)
             }else{
-                $("#requestbtn"+to_id).text('Send Request');
-                $("#requestbtn"+to_id).prop('disabled', false);
+                $(".requestbtn"+to_id).text('Send Request');
+                $(".requestbtn"+to_id).prop('disabled', false);
                 console.log("request failed");
             }
         }
@@ -73,15 +73,15 @@ function cancelreq(cancelto_id){
         method:"post",
         data:{cancelto_id:cancelto_id},
         beforeSend: function () {
-            $("#delete"+cancelto_id).prop('disabled', true);
-            $("#delete"+cancelto_id).text('canceling....');
+            $(".delete"+cancelto_id).prop('disabled', true);
+            $(".delete"+cancelto_id).text('canceling....');
         },
         success:function(data){
             if(data == 0){
-                $("#delete"+cancelto_id).text('Send Request');
-                $("#delete"+cancelto_id).removeClass("cancelreq");
-                $("#delete"+cancelto_id).prop('disabled', false);
-                $("#delete"+cancelto_id).attr("onclick",`sendrequest(${cancelto_id})`);
+                $(".delete"+cancelto_id).text('Send Request');
+                $(".delete"+cancelto_id).removeClass("cancelreq");
+                $(".delete"+cancelto_id).prop('disabled', false);
+                $(".delete"+cancelto_id).attr("onclick",`sendrequest(${cancelto_id})`);
                 document.getElementById("delete"+cancelto_id).id = "requestbtn"+cancelto_id;
             }else{
                 console.log("request failed");
@@ -96,15 +96,15 @@ function deleterequest(deleterequest_id){
         method:"post",
         data:{deleterequest_id:deleterequest_id},
         beforeSend: function () {
-            $("#deletereq"+deleterequest_id).prop('disabled', true);
-            $("#deletereq"+deleterequest_id).text('deleting....');
+            $(".deletereq"+deleterequest_id).prop('disabled', true);
+            $(".deletereq"+deleterequest_id).text('deleting....');
         },
         success:function(data){
             if(data == 0){
                 $("#deletetab"+deleterequest_id).css("display","none");
             }else{
-                $("#deletereq"+deleterequest_id).text('Delete');
-                $("#deletereq"+deleterequest_id).prop('disabled', false);
+                $(".deletereq"+deleterequest_id).text('Delete');
+                $(".deletereq"+deleterequest_id).prop('disabled', false);
                 console.log("request failed");
             }
         }
@@ -118,16 +118,16 @@ function confirmreq(confirmreq_id){
         method:"post",
         data:{confirmreq_id:confirmreq_id},
         beforeSend: function () {
-            $("#confirm"+confirmreq_id).prop('disabled', true);
-            $("#confirm"+confirmreq_id).text('Accepting....');
+            $(".confirm"+confirmreq_id).prop('disabled', true);
+            $(".confirm"+confirmreq_id).text('Accepting....');
         },
         success:function(data){
-            console.log(data);
             if(data == 0){
                 $("#deletetab"+confirmreq_id).css("display","none");
+                $(".confirm"+confirmreq_id).text('Done');
             }else{
-                $("#confirm"+confirmreq_id).text('Confirm');
-                $("#confirm"+confirmreq_id).prop('disabled', false);
+                $(".confirm"+confirmreq_id).text('Confirm');
+                $(".confirm"+confirmreq_id).prop('disabled', false);
                 console.log("request failed");
             }
         }

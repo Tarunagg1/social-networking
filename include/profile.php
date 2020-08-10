@@ -16,7 +16,7 @@ if(isset($_POST['biocontent'])){
 <?php
 /////// display profile post
 include ('dbconf.php');
-;if(isset($_POST['start'] , $_POST['limit'])){
+if(isset($_POST['start'] , $_POST['limit'])){
     $user_data = getuser_info($_SESSION['friendbook']);
    $user_id = $user_data['user_id'];
    $user_img = $user_data['user_img'];
@@ -93,27 +93,27 @@ include ('dbconf.php');
     </div>
 </div>
    <script>
-   $("#comment-text-'.$id.'").keyup(function(e){
-    if (e.keyCode == 13) {
-       value =  $("#comment-text-'.$id.'").val();
-       addcomment('.$id.',value);
-    }
-   })
-   $("#Readmore'.$id.'").click(function(){
-       $("#normal-text'.$id.'").css("display","none")
-       $("#full-text'.$id.'").css("display","block")
-   })
-   $("#Readless'.$id.'").click(function(){
-    $("#full-text'.$id.'").css("display","none")
-    $("#normal-text'.$id.'").css("display","block")
-   })
-   $("#more-operation'.$id.'").click(function(){
-       $("#'.$id.'").fadeToggle();
-       $(".post-row").on("click",function(){
-           $("#'.$id.'").fadeOut();       
-       })
-   })
-   </script>
+    $("#comment-text-'.$id.'").keyup(function (e) {
+      if (e.keyCode == 13) {
+        value = $("#comment-text-'.$id.'").val();
+        addcomment('.$id.', value);
+      }
+    })
+    $("#Readmore'.$id.'").click(function () {
+      $("#normal-text'.$id.'").css("display", "none")
+      $("#full-text'.$id.'").css("display", "block")
+    })
+    $("#Readless'.$id.'").click(function () {
+      $("#full-text'.$id.'").css("display", "none")
+      $("#normal-text'.$id.'").css("display", "block")
+    })
+    $("#more-operation'.$id.'").click(function () {
+      $("#'.$id.'").fadeToggle();
+      $(".post-row").on("click", function () {
+        $("#'.$id.'").fadeOut();
+      })
+    })
+  </script>
    ';
    }
 
@@ -256,16 +256,6 @@ if(isset($_POST['post_id'] , $_POST['comment_text'])){
     echo getcommentcount($p_id);
 }
 
-//////////////////////////////////////////get comment counr
-function getcommentcount($postid){
-    global $conn;
-    $ratting = array();
-    $countcom = "SELECT count(*) FROM `comment` WHERE `post_id` = '$postid' and `is_display` = '1'";
-    $comres = mysqli_query($conn,$countcom);
-    $likearr = mysqli_fetch_array($comres);
-    $comment_data = ['commentcount'=> $likearr[0]];
-    return json_encode($comment_data);
-}
 
 ?>
 
@@ -287,8 +277,8 @@ if(isset($_POST['comment_id'])){
         </div>
         <div class="comment-footer">
             <ul>
-                <li>Like</li>
-                <li>Reply</li>
+                <li>1 Like</li>
+                <li>1 Reply</li>
                 <li>'.get_time_ago($comrow['numarical_time']).'</li>
             </ul>
         </div>
@@ -321,26 +311,6 @@ if(isset($_POST['like_action'], $_POST['post_id'])){
     echo getratting($p_id);
     exit(0);
 }
-
-function getratting($postid){
-    global $conn;
-    $ratting = array();
-    $likeq = "SELECT count(*) FROM `like_table` WHERE `post_id` = '$postid' and `action` = 'like'";
-    $likeres = mysqli_query($conn,$likeq);
-    $likearr = mysqli_fetch_array($likeres);
-    $ratting = ['likes'=> $likearr[0]];
-    return json_encode($ratting);
-}
-
-function userlike($id){
-    global $conn;
-    global $user_id;
-    $qur5 = mysqli_query($conn,"SELECT * FROM `like_table` WHERE post_id = '$id' and `user_id` = '$user_id' and `action` = 'like'");
-    if(mysqli_num_rows($qur5) > 0){
-         return true;
-    }else{
-        return false;
-}}
 ?>
 
 <?php
@@ -454,6 +424,3 @@ if(isset($_POST['unarchivereq'])){
     $res1 = mysqli_query($conn,"UPDATE user_post SET hide_timeline='1' WHERE user_id='$user_id' AND post_id='$pid'");
 }
 ?>
-
-
-

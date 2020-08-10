@@ -63,7 +63,7 @@ if(isset($_GET['q'])){
         <div class="friend-box">
             <img src="userimages/<?php echo $row['user_img'];  ?>" alt="">
             <div class="tags">
-                <a href="#"><?php echo $row['username'];  ?></a>
+                <a href="friend.php?id=<?php echo $row['user_id']+100;  ?>"><?php echo $row['username'];  ?></a>
                 <p><?php echo $row['user_gender'] ?></p>
                 <p><?php echo $row['user_email'] ?></p>
             </div>
@@ -82,5 +82,17 @@ if(isset($_GET['q'])){
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </body>
-
+<script>
+///*////////////////////////serch page
+$(document).ready(function () {
+    var commentcount = 2;
+    $('#view-more-user').click(function () {
+        keyword = $('#keyword').val();
+        commentcount = commentcount + 2;
+        $('.serch-box-main').load('include/backend1.php', {
+            commentcount: commentcount, keyword: keyword
+        })
+    })
+})
+</script>
 </html>

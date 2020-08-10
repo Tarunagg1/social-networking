@@ -19,3 +19,18 @@ if(isset($_FILES['storyimg'])){
 }
 ?>
 
+<?php
+////////////////////////////////////////////// story display
+if(isset($_POST['stid'])){
+    $id = $_POST['stid']-4567;
+    $dataarr = array();
+    $res = mysqli_query($conn,"SELECT story_img FROM stories WHERE user_id='$id' AND story_isvalid='1'");
+    $totalcount = mysqli_num_rows($res);
+    $data = mysqli_fetch_all($res);
+    $temp = array($totalcount);
+    array_push($temp,$data);
+    // array_push($data,$temp);
+    $js =  json_encode($temp,true);
+    echo $js;
+}
+?>

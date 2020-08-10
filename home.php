@@ -11,6 +11,27 @@ define("title", "home");
     <link rel="stylesheet" href="css/home.css">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <title>Document</title>
+    <style>
+    #load_data_msg,#afterdatamsg {
+        margin: 30px 0px 20px 167px;
+    }
+    #load_data_msg img.done{
+        width: 199px;
+        height: 108px;
+        opacity: 0.6;
+        margin-left: -2px;
+    }
+    #load_data_msg img {
+        height: 74px;
+        margin: 0px 0px 20px 20%;
+        width: 70px;
+    }
+    #afterdatamsg img{
+        height: 74px;
+        margin: 0px 0px 20px 20%;
+        width: 70px;
+    }
+    </style>
 </head>
 
 <body>
@@ -78,40 +99,11 @@ define("title", "home");
                         <input type="text" id="myBtn" placeholder="What's on your mind, <?php echo ucfirst($name); ?>?">
                     </div>
                 </div>
-                <div class="posts">
-                    <div class="post-header">
-                        <img src="img/avatar7.png" alt="">
-                        <a href="#" id="name">Tarun Aggarwal jihuy ijuh ijhug ijuh gjhuyg huyg juh </a>
-                        <p id="time">Yesterdatyb 008 52</p>
-                    </div>
-                    <div class="post-text">
-                        <p>B. Tech Admissions Open For 2020 Batch at Bennett University (Times of India Group). Learning
-                            through Internships, Live Projects & Curriculum designed by Industry Experts. Industry Ready
-                            Programs designed by Experts. Faculties from IIT's & Global Institutions. Highest CTC 44 lac
-                            pa for placement 2020.
-                            Apply Based on 12th, JEE Or SAT Score. Get Upto 100% Scholarship.
-                        </p>
-                    </div>
-                    <div class="img">
-                        <img src="img/imgban.jpg" alt="">
-                    </div>
-                    <div class="post-counts">
-                        <span id="likes">100 likes</span><span id="comment">50 Comments</span> <span id="share">20
-                            shares</span>
-                    </div>
-                    <hr>
-                    <div class="post-actions">
-                        <button class="p-btn"><i id="like-btn" class="fa fa-thumbs-up" aria-hidden="true"></i>
-                            Like</button>
-                        <button class="p-btn"><i class="fa fa-comments-o" aria-hidden="true"></i> Comment</button>
-                        <button class="p-btn"><i class="fa fa-share-alt" aria-hidden="true"></i> Share</button>
-                    </div>
-                    <hr>
-                    <div class="write-comment">
-                        <img src="img/avatar7.png" alt="">
-                        <input type="text" placeholder="Write a comment">
-                    </div>
-                </div>
+
+                <div id="postcontainer" class="postcontainer"></div>
+                <div id="load_data_msg"></div>
+                <div id="afterdata" class="h"></div>
+                <div id="afterdatamsg"></div>
             </div>
         </div>
     </div>
@@ -123,5 +115,4 @@ define("title", "home");
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </body>
-
 </html>

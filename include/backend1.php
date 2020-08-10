@@ -60,7 +60,7 @@ if(isset($_POST['commentcount'] , $_POST['keyword'])){
             $output .='<div class="friend-box">
             <img src="userimages/'.$row['user_img'].'" alt="">
             <div class="tags">
-                <a href="#">'.$row['username'].'</a>
+                <a href="friend.php?id='.($row['user_id']+100).'">'.$row['username'].'</a>
                 <p>'.$row['user_gender'].'</p>
                 <p>'.$row['user_email'].'</p>
             </div>

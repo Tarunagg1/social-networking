@@ -132,4 +132,39 @@ function reciverequest($to_id){
       return $data;
 }
 
+/////////////////////////////////////////////////////////////////////////////////// for post
+//////////////////////////////////////////get comment counr
+function getcommentcount($postid){
+    global $conn;
+    $ratting = array();
+    $countcom = "SELECT count(*) FROM `comment` WHERE `post_id` = '$postid' and `is_display` = '1'";
+    $comres = mysqli_query($conn,$countcom);
+    $likearr = mysqli_fetch_array($comres);
+    $comment_data = ['commentcount'=> $likearr[0]];
+    return json_encode($comment_data);
+}
+
+function getratting($postid){
+    global $conn;
+    $ratting = array();
+    $likeq = "SELECT count(*) FROM `like_table` WHERE `post_id` = '$postid' and `action` = 'like'";
+    $likeres = mysqli_query($conn,$likeq);
+    $likearr = mysqli_fetch_array($likeres);
+    $ratting = ['likes'=> $likearr[0]];
+    return json_encode($ratting);
+}
+
+function userlike($id){
+    global $conn;
+    global $user_id;
+    $qur5 = mysqli_query($conn,"SELECT * FROM `like_table` WHERE post_id = '$id' and `user_id` = '$user_id' and `action` = 'like'");
+    if(mysqli_num_rows($qur5) > 0){
+         return true;
+    }else{
+        return false;
+}}
+
+
+
+
 ?>

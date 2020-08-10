@@ -1,3 +1,88 @@
+////////////////////////////////////////////////////////////////////////////////////// display post data
+
+$(document).ready(function () {
+    var limit = 2;
+    var start = 0;
+    var action = 'inactive';
+    function load_data(limit, start) {
+        $.ajax({
+            url: "include/backendhome.php",
+            method: 'POST',
+            data: {
+                limit: limit,
+                start: start,
+            },
+            cache: false,
+            success: function (data) {
+                $('#postcontainer').append(data)
+                if (data != 0) {
+                    $('#load_data_msg').html('<img src="img/loading.gif" alt="Not Found">');
+                    action = 'inactive';
+                } else {
+                    $('#load_data_msg').html('<h4>No Recent Post Now</h4><img class="done" src="img/done.gif" alt="Not Found">');
+                    action = 'active';
+                    allafterpost();
+                }
+            }
+        });
+    }
+    if (action = 'inactive') {
+        action = 'active';
+        load_data(limit, start);
+    }
+    $(window).scroll(function () {
+        if ($(window).scrollTop() + $(window).height() > $("#postcontainer").height() && action == 'inactive') {
+            action = 'active';
+            start = start + limit;
+            setTimeout(function () {
+                load_data(limit, start)
+            }, 1000);
+        }
+    })
+});
+
+
+function allafterpost(){
+    var alimit = 5;
+    var astart = 0;
+    var action = 'inactive';
+    function load_data(alimit, astart) {
+        $.ajax({
+            url: "include/backendhome.php",
+            method: 'POST',
+            data: {
+                alimit: alimit,
+                astart: astart,
+            },
+            cache: false,
+            success: function (data) {
+                $('#afterdata').append(data)
+                if (data != 0) {
+                    $('#afterdatamsg').html('<img src="img/loading.gif" alt="Not Found">');
+                    action = 'inactive';
+                } else {
+                    $('#afterdatamsg').html('<h1>No More Data Found</h1>');
+                    action = 'active';
+                }
+            }
+        });
+    }
+    if (action = 'inactive') {
+        action = 'active';
+        load_data(alimit, astart);
+    }
+    $(window).scroll(function () {
+        if ($(window).scrollTop() + $(window).height() > $("#afterdata").height() && action == 'inactive') {
+            action = 'active';
+            astart = astart + alimit;
+            setTimeout(function () {
+                load_data(alimit, astart)
+            }, 1000);
+        }
+    })
+}
+
+
 function imagevalidate() {
     var property = document.getElementById('postimage').files[0];
     var imgename = property.name;
@@ -60,17 +145,6 @@ $('#createpost').on('submit', function (e) {
     });
 });
 
-///*////////////////////////serch page
-$(document).ready(function () {
-    var commentcount = 2;
-    $('#view-more-user').click(function () {
-        keyword = $('#keyword').val();
-        commentcount = commentcount + 2;
-        $('.serch-box-main').load('include/backend1.php', {
-            commentcount: commentcount, keyword: keyword
-        })
-    })
-})
 
 ///////////////////////////////////////////// friend fetch
 // setInterval(featchfriend,2000)
@@ -172,4 +246,5 @@ $("#sendimg").click(function () {
 $(".sto").on('click',function(){
     window.location.href =`stories.php`;
 })
+
 

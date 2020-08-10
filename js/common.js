@@ -90,4 +90,63 @@ window.onclick = function (event) {
 
 
 
+////////////////////////////////////////////////////// post
+function likepost(id) {
+  ///////////////////////////////////////////////////// post like ddislike post
+  btn = $("#like-btn-" + id);    
+  if (btn.hasClass('fa-notlike')) {
+      action = "like";
+  } else if (btn.hasClass('like-post')) {
+      action = "unlike"
+  }
+  $.ajax({
+      url: "include/profile.php",
+      type: "post",
+      data: { 'like_action': action, 'post_id': id },
+      success: function (data) {
+          res = JSON.parse(data);
+          if (action === 'like') {
+              btn.removeClass('fa-notlike');
+              btn.addClass('like-post');
+          } else if (action === 'unlike') {
+              btn.removeClass('like-post');
+              btn.addClass('fa-notlike');
+          }
+          $(".likes" + id).text(res.likes + " Likes");
+      }
+  })
+}
+
+function addcomment(id, value) {
+  if (id != "" && value != "") {
+      $.ajax({
+          url: "include/profile.php",
+          type: 'post',
+          data: { post_id: id, comment_text: value },
+          success: function (data) {
+              res = JSON.parse(data)
+              $(".comment" + id).text(res.commentcount + " Comment");
+              $("#comment-text-" + id).val("")
+              commentsection(id);
+          }
+      })
+  } else {
+      console.log("enter some text");
+  }
+}
+function commentsection(id) {
+  if (id != "") {
+      $.ajax({
+          url: "include/profile.php",
+          type: 'post',
+          data: { comment_id: id },
+          success: function (data) {
+              $("#post-comment-container" + id).html(data);
+          }
+      })
+  } else {
+      console.log("enter some text");
+  }
+  $("#post-comment-container" + id).fadeToggle();
+}
 

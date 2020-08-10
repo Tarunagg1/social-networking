@@ -450,7 +450,7 @@ hr {
     color: #6894b8;
 }
 .middle .mainbox .posts .post-counts #likes{
-    margin: 0px 46% 0px 12px;
+    margin: 0px 55% 0px 12px;
     font-size: 14px;
     font-weight: bold;
 }
@@ -1041,3 +1041,51 @@ hr {
     border-top: 6px solid transparent;
     border-bottom:6px solid transparent;
   }
+
+  /* //////////////////////////////////////////////////////////////// */
+  .post-comment-container{
+    height: 275px;
+    overflow-y: scroll;
+    display: none;
+}
+.post-comment-container .comment-message .comment-message-header{
+    display: flex;
+}
+.post-comment-container .comment-message img{
+    width: 9%;
+    padding: 14px;
+    border-radius: 50%;
+    height: 53px;
+}
+.post-comment-container .comment-message .message{
+    background-color: rgb(58, 59, 60);
+    border-radius: 25px;
+    margin-right: 38px;
+    padding: 10px;
+}
+.post-comment-container .comment-message .message a{
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+    padding: 6px 0px 0px 10px;
+}
+.post-comment-container .comment-message .message p{
+    padding: 2px 0px 2px 4px;
+    color: white;
+}
+.post-comment-container .comment-message .comment-footer ul{
+    display: flex;
+    margin-left: 16%;
+}
+.post-comment-container .comment-message .comment-footer li{
+    list-style: none;
+    cursor: pointer;
+    margin-bottom: 15px;
+    font-size: 12px;
+    margin-right: 3%;
+} 
+
+.middle .mainbox .posts .post-actions i.like-post{
+    font-size: 20px;
+    color: blue;
+}

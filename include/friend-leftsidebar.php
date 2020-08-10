@@ -1,9 +1,11 @@
 <div class="left">
     <h1>Friends</h1>
-    <h5>9 Friend Request</h5>
+    <?php
+            $request_data = reciverequest($user_id);
+         echo'<h5>'.mysqli_num_rows($request_data).'  Friend Request</h5>';
+    ?>
     <a href="">View Send Request</a>
     <?php
-    $request_data = reciverequest($user_id);
     if(mysqli_num_rows($request_data) > 0){
     while ($row = mysqli_fetch_array($request_data)) {
         $data = getuserdataid($row['from_id']);
@@ -16,8 +18,8 @@
             <p><?php echo $user_data['username']  ?></p>
     </a>
     <div class="buttons">
-        <button onClick="confirmreq(<?php echo $row['id'] ?>)" class="btn" id="confirm<?php echo $row['id'] ?>">Confirm</button>
-        <button onClick="deleterequest(<?php echo $row['id'] ?>)" class="btn delete" id="deletereq<?php echo $row['id'] ?>">Delete </button>
+        <button onClick="confirmreq(<?php echo $row['id'] ?>)" class="btn confirm<?php echo $row['id'] ?>">Confirm</button>
+        <button onClick="deleterequest(<?php echo $row['id'] ?>)" class="btn delete deletereq<?php echo $row['id'] ?>">Delete </button>
     </div>
 </div>
 <?php  }}else{
@@ -51,11 +53,11 @@ while ($row1 = mysqli_fetch_assoc($data1)) {
         <p><?php echo $row1['username']; ?></p>
 </a>
 <div class="buttons">
-<?php if(checkrequest($user1_id,($uid-100)) == true){ echo '<button onClick="cancelreq('.$uid.')" id="delete'.$uid.'" class="btn cancelreq">cancel Req</button>'; }
+<?php if(checkrequest($user1_id,($uid-100)) == true){ echo '<button onClick="cancelreq('.$uid.')" class="delete'.$uid.' btn cancelreq">cancel Req</button>'; }
 elseif(mysqli_num_rows($check_req_recive) == 1){
     echo '<button class="btn reqrecive">Req Recive</button>';   
 }
-else { echo '<button onClick="sendrequest('.$uid.')" id="requestbtn'.$uid.'" class="btn">Send Request</button>';} ?><button onClick="" class="btn delete">Remove</button>
+else { echo '<button onClick="sendrequest('.$uid.')" class="requestbtn'.$uid.' btn">Send Request</button>';} ?><button onClick="" class="btn delete">Remove</button>
 </div>
 </div>
 <?php } ?>

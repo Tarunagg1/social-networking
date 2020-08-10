@@ -91,12 +91,12 @@ include("include/functions.php");
                             $ddd = mysqli_fetch_array($check_reqcomedata);
                             $check_friendtable = mysqli_query($conn,"SELECT * FROM friend_table WHERE user_from='$get_id' AND user_to='$user_id' AND status='friend' OR user_from='$user_id' AND user_to='$get_id' AND status='friend'");
                             if(mysqli_num_rows($check_reqcomedata) == 1){
-                                echo '<button onClick="confirmreq('.$ddd['id'].')" class="btn" id="confirm'.$ddd['id'].'">Confirm</button>';
+                                echo '<button onClick="confirmreq('.$ddd['id'].')" class="btn confirm'.$ddd['id'].'">Confirm</button>';
                             }elseif(mysqli_num_rows($check_friendtable) == 1){
-                                echo '<button onClick="cancelreq('.($get_id+100).')" class="cancelreq" id="delete'.($get_id+100).'">UnFollow</button>';
+                                echo '<button onClick="cancelreq('.($get_id+100).')" class="delete'.($get_id+100).' cancelreq" id="delete'.($get_id+100).'">UnFollow</button>';
                             } 
-                            elseif(checkrequest($user_id,($get_id)) == true){ echo '<button onClick="cancelreq('.($get_id+100).')" class="cancelreq" id="delete'.($get_id+100).'">Cancel Req</button>'; }
-                            else { echo '<button onClick="sendrequest('.($get_id+100).')" id="requestbtn'.($get_id+100).'">Send Request</button>';} ?>
+                            elseif(checkrequest($user_id,($get_id)) == true){ echo '<button onClick="cancelreq('.($get_id+100).')" class="delete'.($get_id+100).' cancelreq">Cancel Req</button>'; }
+                            else { echo '<button onClick="sendrequest('.($get_id+100).')" class="requestbtn'.($get_id+100).'">Send Request</button>';} ?>
                                 <button><i class="fa fa-message" aria-hidden="true"></i>Send Message</button>
                                 <button><i class="fa fa-search" aria-hidden="true"></i> Search</button>
                             </div>
@@ -172,6 +172,7 @@ include("include/functions.php");
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script data-cfasync="false" type="text/javascript" src="js/common.js"></script>
     <script data-cfasync="false" type="text/javascript" src="js/friend.js"></script>
+    <script data-cfasync="false" type="text/javascript" src="js/profile.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </body>
 

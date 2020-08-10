@@ -1,7 +1,11 @@
 /////////////////////fetch data
 $(document).ready(function () {
-    var limit = 2;
-    var start = 0;
+    loadprofiledata(0,2);  
+});
+
+function loadprofiledata(s,l) {
+    var limit = l;
+    var start = s;
     var action = 'inactive';
     function load_data(limit, start) {
         $.ajax({
@@ -12,7 +16,7 @@ $(document).ready(function () {
                 start: start,
             },
             cache: false,
-            success: function (data) {
+            success: function (data) {                
                 $('#load_data').append(data)
                 if (data != 0) {
                     $('#load_data_msg').html('<img src="img/loading.gif" alt="Not Found">');
@@ -37,8 +41,7 @@ $(document).ready(function () {
             }, 1000);
         }
     })
-
-});
+}
 
 /////////////// create Post
 $('#postimage').on("change", function () {
@@ -76,10 +79,7 @@ $('#createpost').on('submit', function (e) {
                 $('#postbutton').prop('disabled', false);
                 $('#postbutton').val('Post');
                 var modal = document.getElementById("myModal");
-                $("#load_data").load("include/backend1.php", {
-                    limit: 2,
-                    start: 0
-                })
+                loadprofiledata(0,2);  
                 modal.style.display = "none";
             }
         },
@@ -389,67 +389,6 @@ $('#editpost').on('submit', function (e) {
     });
 });
 
-function addcomment(id, value) {
-    if (id != "" && value != "") {
-        $.ajax({
-            url: "include/profile.php",
-            type: 'post',
-            data: { post_id: id, comment_text: value },
-            success: function (data) {
-                res = JSON.parse(data)
-                $(".comment" + id).text(res.commentcount + " Comment");
-                $("#comment-text-" + id).val("")
-                commentsection(id);
-            }
-        })
-    } else {
-        console.log("enter some text");
-    }
-}
-function commentsection(id) {
-    if (id != "") {
-        $.ajax({
-            url: "include/profile.php",
-            type: 'post',
-            data: { comment_id: id },
-            success: function (data) {
-                $("#post-comment-container" + id).html(data);
-            }
-        })
-    } else {
-        console.log("enter some text");
-    }
-    $("#post-comment-container" + id).fadeToggle();
-}
-
-
-function likepost(id) {
-    ///////////////////////////////////////////////////// post like ddislike post
-    btn = $("#like-btn-" + id);
-    if (btn.hasClass('fa-notlike')) {
-        action = "like";
-    } else if (btn.hasClass('like-post')) {
-        action = "unlike"
-    }
-    $.ajax({
-        url: "include/profile.php",
-        type: "post",
-        data: { 'like_action': action, 'post_id': id },
-        success: function (data) {
-            res = JSON.parse(data);
-            if (action === 'like') {
-                btn.removeClass('fa-notlike');
-                btn.addClass('like-post');
-            } else if (action === 'unlike') {
-                btn.removeClass('like-post');
-                btn.addClass('fa-notlike');
-            }
-            $(".likes" + id).text(res.likes + " Likes");
-        }
-    })
-}
-
-
 ////////////////////////////////////////////////////////////////////////////////    profile division
 let whichactive = "timeline";
 
@@ -487,10 +426,13 @@ $("#about").on('click', function () {
     $("#profile-main").load('include1/about.php');
 })
 
-$("#aboutbtn").click(function(){
+$("#aboutbtn").click(function () {
     $("#about").click();
 })
-    
+$("#EditDetails").click(function () {
+    $("#about").click();
+})
+
 $("#archive").on('click', function () {
     $(`#${whichactive}`).removeClass("profileactive")
     whichactive = "archive";
@@ -540,29 +482,29 @@ $("#photos").on('click', function () {
 
 //////////////////////////////////////////////////////////////////////////////// archive post unarchive
 
-function unarchivelist(id){
+function unarchivelist(id) {
     $(`#postlist${id}`).fadeToggle();
 }
 
-function unarchive(id){
+function unarchive(id) {
     $.ajax({
         url: "include/profile.php",
         method: "post",
-        data: {unarchivereq:id},
+        data: { unarchivereq: id },
         success: function (data) {
             console.log(data);
-            if(data == 0){
+            if (data == 0) {
                 $(`#archivepost${id}`).hide();
             }
         }
     })
 }
 
-$("#viwephoto").on('click',function(){
+$("#viwephoto").on('click', function () {
     $("#photos").click();
 })
 
-$("#viewallfrnd").on('click',function(){
-    $("#viewfriend").click();    
+$("#viewallfrnd").on('click', function () {
+    $("#viewfriend").click();
 })
 

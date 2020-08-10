@@ -34,8 +34,24 @@ include_once('functions.php');
        $img = ($row['post_img'] != 'NULL') ? $row['post_img'] : "";
        echo ' <div class="row" id="row'.$id.'">              
        <div class="post-header">
-       <img src="userimages/'. $post_userdata['user_img'].'" alt="">
-       <a href="#" id="name">'.$post_userdata['username'].'</a>
+       <div class="post-operation-list" style="" id="'.$id.'">
+       <ul>
+           <div class="post-row" onClick="deletepost('.$id.')">
+               <li><i class="fa fa-trash" aria-hidden="true"></i> Delete Post</li>
+           </div>
+           <div class="post-row" onClick="editpost('.$id.')">
+               <li> <i class="fa ser fa-pencil"></i> Edit Post</li>
+           </div>
+           <div class="post-row" onClick="hidetimelinepost('.$id.')">
+               <li><i class="fa fa-eye-slash" aria-hidden="true"></i>Hide From Timeline</li>
+           </div>
+           <div class="post-row">
+           <li><i class="fa fa-times" aria-hidden="true"></i>Cancel</li>
+       </div>
+       </ul>
+   </div>
+       <img src="userimages/'.$user_img.'" alt="">
+       <a href="#" id="name">'.$user_data['username'].'</a><span id="more-operation'.$id.'">...</span>
        <p id="time">'.$row['post_date'].'</p>
    </div>
    <div class="post-text">
@@ -57,10 +73,10 @@ include_once('functions.php');
    </div>
    <hr>
    <div class="write-comment">
-   <img src="userimages/'. $post_userdata['user_img'].'" alt="">
+   <img src="userimages/'.$user_img.'" alt="comment-img">
    <input type="text" id="comment-text-'.$id.'" placeholder="Write a comment">
     </div>
-    '; if($comment_count > 0) { echo '
+    '; if($comment_count >=0) { echo '
    <div class="post-comment-container" id="post-comment-container'.$id.'">
    <div id="row"></div>
   '; 
@@ -83,21 +99,18 @@ include_once('functions.php');
     $("#full-text'.$id.'").css("display","none")
     $("#normal-text'.$id.'").css("display","block")
    })
+   $("#more-operation'.$id.'").click(function(){
+       $("#'.$id.'").fadeToggle();
+       $(".post-row").on("click",function(){
+           $("#'.$id.'").fadeOut();       
+       })
+   })
    </script>
    ';
    }
 
 }
 
-function userlike($id){
-    global $conn;
-    global $user_id;
-    $qur5 = mysqli_query($conn,"SELECT * FROM `like_table` WHERE post_id = '$id' and `user_id` = '$user_id' and `action` = 'like'");
-    if(mysqli_num_rows($qur5) > 0){
-         return true;
-    }else{
-        return false;
-}}
 
 if(isset($_POST['to_id'])){
     sleep(2);

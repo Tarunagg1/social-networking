@@ -43,7 +43,7 @@ body{
 .container .storycontainer .story-imagecon{
     width: 100%;
     overflow: hidden;
-    height: 702px;
+    height: 701px;
     background-color: black;
 }
 .container .storycontainer .story-imagecon .storydisplay{
@@ -77,6 +77,46 @@ body{
     top: 21px;
     left: -124px;
 
+}
+.container .storycontainer .story-imagecon .storydisplay .counts{
+    display: flex;
+    position: relative;
+    border: 1px solid white;
+    width: 10%;
+    margin-left: 10% 3px 2px 36%;
+    top: 12px;
+    padding: 10px 2px 11px 62px;
+    left: 35%;
+}
+.container .storycontainer .story-imagecon .storydisplay .storybtnnone{
+    display: none;
+}
+.container .storycontainer .story-imagecon .storydisplay .stmove{
+    position: absolute;
+    background: lightslategray;
+    height: 32px;
+    border-radius: 50%;
+    padding: 12px 0px 0px 13px;
+    width: 32px;
+    cursor: pointer;
+}
+.container .storycontainer .story-imagecon .storydisplay .stmove.stnextvbtn{
+    top: 44%;
+    left: 65%;
+}
+.container .storycontainer .story-imagecon .storydisplay .stmove.stprevbtn{
+    top: 44%;
+    left: 20%;
+}
+.container .storycontainer .story-imagecon .storydisplay .stmove.storybtnclose{
+    left: 20px;
+    top: 10px;
+}
+.container .storycontainer .story-imagecon .storydisplay .stmove i{
+    font-size: 20px;
+}
+.container .storycontainer .story-imagecon .storydisplay .counts p{
+font-size: 26px;
 }
 .blur {
     /* All the background image supports */

@@ -87,11 +87,11 @@ $('#addstories').on('submit', function (e) {
                     $('#storybtn').val('Add Stories');
                     $("#add-story").attr("src", "")
                     stomodal.style.display = "none";
-                    $("#mystry").html(` <div class="tab" id="tab">
+                    document.getElementById("mystry").innerHTML = `<div data-id="4" class="tab stclick" id="tab">
                     <img src="userimages/${myimg}" alt="User img">
                     <p>View your Stories</p><span>1S</span>
                     <i class="mystac">1 Stories</i>
-                </div>`);
+                </div>`;
                 }
             },
             error: function () {
@@ -102,12 +102,68 @@ $('#addstories').on('submit', function (e) {
 });
 
 
-$(".stclick").on('click',function(){
+$(".stclick").on('click', function () {
     id = $(this).attr("data-id");
-    console.log(id);
-    $("#storycontainer").html(` <div class="story-imagecon">
+    $.ajax({
+        url: "include/storiesbackend.php",
+        type: 'post',
+        data: { "stid": id },
+        success: function (data) {
+            res = JSON.parse(data);
+            total = res[0];
+            current = 0;
+            if (current + 1 != total)
+                $("#stnextvbtn").removeClass("storybtnnone")
+            $("#total").text(total);
+            $("#current").text(current + 1);
+            $("#stpic").attr("src", "storiesimg/" + res[1][current])
+            $("#stnextvbtn").click(function () {
+                current++;
+                $("#stpic").attr("src", "storiesimg/" + res[1][current])
+                $("#current").text(current + 1);
+                if (total == current + 1)
+                    $("#stnextvbtn").addClass("storybtnnone")
+                $("#stprevbtn").removeClass("storybtnnone")
+            })
+            $("#stprevbtn").click(function () {
+                current--;
+                $("#stpic").attr("src", "storiesimg/" + res[1][current])
+                $("#current").text(current + 1);
+                $("#stnextvbtn").removeClass("storybtnnone");
+                if (current == 0)
+                    $("#stprevbtn").addClass("storybtnnone")
+            })
+        },
+        error: function () {
+            alert("error is accured");
+        }
+    });
+    document.getElementById("storycontainer").innerHTML = `<div class="story-imagecon">
     <div class="storydisplay blur">
-        <img id="coverpic" src="userimages/9713d3e30be4096f6520df83b1c91147.jpeg" alt="Not Found" srcset="">
+        <div class="counts">
+            <div class="run">
+                <p id="current">0</p>
+            </div>
+            <div class="mid">
+                <p>:</p>
+            </div>
+            <div class="total">
+                <p id="total">0</p>
+            </div>
+        </div>
+        <div class="stmove storybtnnone stprevbtn" id="stprevbtn"><i class="fa fa-arrow-left" aria-hidden="true"></i></div>
+        <div class="stmove storybtnnone stnextvbtn" id="stnextvbtn"><i class="fa fa-arrow-right" aria-hidden="true"></i></div>
+        <div class="stmove storybtnclose" onClick="closestd()"><i class="fa fa-window-close" aria-hidden="true"></i></div>
+        <div class="stchange">
+            <img id="stpic" src="" alt=""srcset="">
+        </div>
     </div>
-</div>`)
+</div>`;
 })
+
+function closestd(){
+    document.getElementById("storycontainer").innerHTML = `<div class="notstoryid">
+    <i class="fa fa-picture-o" aria-hidden="true"></i>
+    <h5>Select a story to open.</h5>
+</div>`;
+}

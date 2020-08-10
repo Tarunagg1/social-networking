@@ -10,7 +10,7 @@
             <p>From New Delhi, India</p>
             <p>Joined on June 2017</p>
         </div>
-        <button>Edit Details</button>
+        <button id="EditDetails">Edit Details</button>
     </div>
     <div class="box">
         <h2>Photos</h2>
