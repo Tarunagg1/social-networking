@@ -93,8 +93,6 @@ if(isset($_POST['start'] , $_POST['limit'])){
 }
 
 
-
-
 if(isset($_POST['astart'] , $_POST['alimit'])){
   $user_data = getuser_info($_SESSION['friendbook']);
  $user_id = $user_data['user_id'];

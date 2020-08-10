@@ -13,6 +13,9 @@ $(document).ready(function () {
                 start: start,
             },
             cache: false,
+            beforeSend: function () {
+                $('#load_data_msg').html('<img style="height: 100px; margin-left: 87px;" src="img/loading1.gif" alt="Not Found">');
+            },
             success: function (data) {
                 $('#postcontainer').append(data)
                 if (data != 0) {
@@ -41,6 +44,7 @@ $(document).ready(function () {
     })
 });
 
+////////////////////////////////////////////////////////////////// after post
 
 function allafterpost(){
     var alimit = 5;
@@ -55,6 +59,9 @@ function allafterpost(){
                 astart: astart,
             },
             cache: false,
+            beforeSend: function () {
+                $('#afterdatamsg').html('<img style="height: 100px; margin-left: 87px;" src="img/loading1.gif" alt="Not Found">');
+            },
             success: function (data) {
                 $('#afterdata').append(data)
                 if (data != 0) {
@@ -155,6 +162,9 @@ function featchfriend() {
             url: "include/backend.php",
             type: 'post',
             data: { loadfriend: "laoddata" },
+            beforeSend: function () {
+                $('#right-user-con').html('<img style="height: 100px; margin-left: 87px;" src="img/loading1.gif" alt="Not Found">');
+            },
             success: function (data) {
                 $("#right-user-con").html(`${data}`)
             }
