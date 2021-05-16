@@ -76,7 +76,6 @@ if(isset($_POST['logusername'])){
         }
     }else{
         echo "Email Is Not Register With Us";
-           
      }
   }
 ?>
